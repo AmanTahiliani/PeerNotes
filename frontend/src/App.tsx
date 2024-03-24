@@ -1,12 +1,21 @@
-import './App.css'
+import "./styles/App.css";
+import { Link } from 'react-router-dom';
 
-function App() {
+export default function App() {
 
   return (
     <>
+      <Navbar />
       <h1>PeerNotes</h1>
     </>
   )
 }
 
-export default App
+function Navbar() {
+  return (
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/logout">Logout</Link>
+    </nav>
+  );
+}

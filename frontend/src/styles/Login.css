@@ -1,0 +1,20 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+h1 {
+    text-align: center;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+}
