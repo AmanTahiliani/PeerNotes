@@ -56,6 +56,7 @@ class File(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.SET_NULL, null=True, related_name="files"
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.filename
