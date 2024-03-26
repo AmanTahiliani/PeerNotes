@@ -16,9 +16,43 @@ Including another URLconf
 """
 
 from django.urls import path
-from api.user_login import LoginView, SignupView
+from api.user_login import LoginView, SignupView, PollOnlineView
+from api import views
 
 urlpatterns = [
     path("api/login/", LoginView.as_view(), name="login"),
     path("api/signup/", SignupView.as_view(), name="signup"),
+    path("api/poll/", PollOnlineView.as_view(), name="poll"),
+    path("api/topics/", views.TopicListCreateAPIView.as_view(), name="topic-list"),
+    path(
+        "api/topics/<int:pk>/", views.TopicDetailAPIView.as_view(), name="topic-detail"
+    ),
+    path(
+        "api/professors/",
+        views.ProfessorListCreateAPIView.as_view(),
+        name="professor-list",
+    ),
+    path(
+        "api/professors/<int:pk>/",
+        views.ProfessorDetailAPIView.as_view(),
+        name="professor-detail",
+    ),
+    path(
+        "api/semesters/",
+        views.SemesterListCreateAPIView.as_view(),
+        name="semester-list",
+    ),
+    path(
+        "api/semesters/<int:pk>/",
+        views.SemesterDetailAPIView.as_view(),
+        name="semester-detail",
+    ),
+    path("api/courses/", views.CourseListCreateAPIView.as_view(), name="course-list"),
+    path(
+        "api/courses/<int:pk>/",
+        views.CourseDetailAPIView.as_view(),
+        name="course-detail",
+    ),
+    path("api/files/", views.FileListCreateAPIView.as_view(), name="file-list"),
+    path("api/files/<int:pk>/", views.FileDetailAPIView.as_view(), name="file-detail"),
 ]
