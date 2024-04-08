@@ -1,4 +1,4 @@
-from api.models import Course, File, Professor, Semester, Topic
+from api.models import Course, File, Professor, Semester, Topic, PeerUser
 from api.serializers import (
     CourseSerializer,
     FileSerializer,
@@ -6,7 +6,9 @@ from api.serializers import (
     SemesterSerializer,
     TopicSerializer,
 )
+from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
+from django.db import transaction
 from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
@@ -112,54 +114,125 @@ class RegisterFile(APIView):
         update_user_ip(request)
         data = request.data
         try:
-            required_fields = set(
-                ["filename", "topic", "semester", "professor", "course"]
-            )
-            provided_fields = set(request.data.keys())
-            missing_fields = required_fields - provided_fields
+            with transaction.atomic():
+                required_fields = set(
+                    ["filename", "topic", "semester", "professor", "course"]
+                )
+                provided_fields = set(request.data.keys())
+                missing_fields = required_fields - provided_fields
 
-            if any(["filename", "topic"]) in missing_fields:
-                raise ValidationError(
-                    "Missing one or more of the required field(s): filename, topic"
+                if any(["filename", "topic"]) in missing_fields:
+                    raise ValidationError(
+                        "Missing one or more of the required field(s): filename, topic"
+                    )
+
+                file = File.objects.create(
+                    filename=data["filename"], original_author=user
+                )
+                file.peer_users.add(user)
+
+                file.course = (
+                    Course.objects.get(id=data.get("course"))
+                    if data.get("course")
+                    else None
+                )
+                file.professor = (
+                    Professor.objects.get(id=data.get("professor"))
+                    if data.get("professor")
+                    else None
+                )
+                file.semester = (
+                    Semester.objects.get(id=data.get("semester"))
+                    if data.get("semester")
+                    else None
                 )
 
-            file = File.objects.create(filename=data["filename"], original_author=user)
-            file.peer_users.add(user)
+                topic_id = data["topic"]
 
-            file.course = (
-                Course.objects.get(id=data.get("course"))
-                if data.get("course")
-                else None
-            )
-            file.professor = (
-                Professor.objects.get(id=data.get("professor"))
-                if data.get("professor")
-                else None
-            )
-            file.semester = (
-                Semester.objects.get(id=data.get("semester"))
-                if data.get("semester")
-                else None
-            )
-
-            topic_id = data["topic"]
-
-            try:
-                topic = Topic.objects.get(id=topic_id)
-                file.topic = topic
-            except Exception as e:
-                topic_serializer = TopicSerializer(data=topic_id)
-                if topic_serializer.is_valid():
-                    topic = topic_serializer.save()
+                try:
+                    topic = Topic.objects.get(id=topic_id)
                     file.topic = topic
+                except Exception as e:
+                    topic_serializer = TopicSerializer(data=topic_id)
+                    if topic_serializer.is_valid():
+                        topic = topic_serializer.save()
+                        file.topic = topic
 
-            file.save()
-            return Response(
-                {"id": file.id, "filename": file.filename, "topic": file.topic.name},
-                status=status.HTTP_201_CREATED,
-            )
+                response_data = {
+                    "id": file.id,
+                    "filename": file.filename,
+                    "topic": file.topic.name if file.topic else None,
+                    "semester": file.semester.name if file.semester else None,
+                    "course": file.course.name if file.course else None,
+                    "professor": file.professor.name if file.professor else None,
+                }
+                file.save()
+                return Response(
+                    response_data,
+                    status=status.HTTP_201_CREATED,
+                )
         except Exception as e:
             print("Error", str(e))
             return Response(
                 {"error(s)": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+
+class FileFilterView(APIView):
+    def get(self, request, format=None):
+        try:
+            # Extract filters from the query parameters
+            topic_id = request.query_params.get("topic")
+            professor_id = request.query_params.get("professor")
+            course_id = request.query_params.get("course")
+            semester_id = request.query_params.get("semester")
+
+            # Check if provided filter IDs exist
+            if topic_id and not Topic.objects.filter(id=topic_id).exists():
+                return Response(
+                    {"error": f"Topic with id {topic_id} does not exist"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            if professor_id and not Professor.objects.filter(id=professor_id).exists():
+                return Response(
+                    {"error": f"Professor with id {professor_id} does not exist"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            if course_id and not Course.objects.filter(id=course_id).exists():
+                return Response(
+                    {"error": f"Course with id {course_id} does not exist"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            if semester_id and not Semester.objects.filter(id=semester_id).exists():
+                return Response(
+                    {"error": f"Semester with id {semester_id} does not exist"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            # Start with the base queryset
+            queryset = File.objects.all()
+
+            # Apply filters if they are provided
+            if topic_id:
+                queryset = queryset.filter(topic__id=topic_id)
+            if professor_id:
+                queryset = queryset.filter(professor__id=professor_id)
+            if course_id:
+                queryset = queryset.filter(course__id=course_id)
+            if semester_id:
+                queryset = queryset.filter(semester__id=semester_id)
+
+            # Filter files based on active peers in the past hour
+            active_peer_ids = PeerUser.objects.filter(
+                last_poll__gte=datetime.now() - timedelta(hours=1)
+            ).values_list("id", flat=True)
+
+            queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
+
+            serializer = FileSerializer(queryset, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(
+                {"error": f"Something went wrong: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )

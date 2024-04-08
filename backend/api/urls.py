@@ -55,5 +55,6 @@ urlpatterns = [
     ),
     path("api/files/", views.FileListCreateAPIView.as_view(), name="file-list"),
     path("api/files/<int:pk>/", views.FileDetailAPIView.as_view(), name="file-detail"),
+    path("api/files/filter/", views.FileFilterView.as_view(), name="file-filter-view"),
     path("api/register/", views.RegisterFile.as_view(), name="file-register"),
 ]
