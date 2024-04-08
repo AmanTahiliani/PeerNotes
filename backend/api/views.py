@@ -179,6 +179,8 @@ class RegisterFile(APIView):
 
 
 class FileFilterView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         try:
             # Extract filters from the query parameters
