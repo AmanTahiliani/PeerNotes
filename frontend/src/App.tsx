@@ -7,7 +7,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' , gap: 15}}>
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
       <img
         src="/PeerNotes.png" 
         alt="PeerNotes Logo" 
