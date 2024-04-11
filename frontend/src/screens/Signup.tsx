@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css"
 import { FormEvent } from "react";
+import { useSessionRedirect } from "../hooks/sessionRedirect";
 export default function Signup() {
+    const navigate = useNavigate();
+    useSessionRedirect();
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -16,8 +20,8 @@ export default function Signup() {
             body: JSON.stringify({ email, username, password }),
         })
         .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
+        .then(() => {
+            navigate('/login');
         })
         .catch((error) => {
             console.error('Error:', error);

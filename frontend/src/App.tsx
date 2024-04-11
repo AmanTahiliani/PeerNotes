@@ -1,31 +1,56 @@
 import "./styles/App.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainSearch from './components/MainSearch';
+import { SessionContext, destroySessionCookie, getSessionCookie } from "./contexts/session";
+import { useState, useEffect, useContext } from "react";
 
 export default function App() {
+  const [session, setSession] = useState(getSessionCookie());
+  const navigate = useNavigate();
+
+  // Redirect to login if session is undefined
+  useEffect(
+    () => {
+      setSession(getSessionCookie());
+      if (session === undefined) {
+        navigate("/login");
+      }
+    },
+    [session, navigate]
+  ); 
 
   return (
     <>
-      <Navbar />
-      <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
-      <img
-        src="/PeerNotes.png" 
-        alt="PeerNotes Logo" 
-        style={{ 
-          height: "100px"
-        }} 
-      />
-     <MainSearch />
-    </div>
+      <SessionContext.Provider value={session}>
+          <Navbar />
+          <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
+            <img
+              src="/PeerNotes.png" 
+              alt="PeerNotes Logo" 
+              style={{ 
+                height: "100px"
+              }} 
+            />
+            <MainSearch />
+          </div>
+        </SessionContext.Provider>
     </>
   )
 }
-
 function Navbar() {
+  const session = useContext(SessionContext);
+
+  const links = session ? (
+    <>
+      <Link to="/">Home</Link>
+      <Link to="/login" onClick={destroySessionCookie}>Logout</Link>
+    </>
+  ): (
+      <Link to="/login">Login</Link>
+  )
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/logout">Logout</Link>
+     {links}
     </nav>
   );
 }
