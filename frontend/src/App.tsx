@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { Link } from 'react-router-dom';
+import MainSearch from './components/MainSearch';
 
 export default function App() {
 
@@ -7,6 +8,16 @@ export default function App() {
     <>
       <Navbar />
       <h1>PeerNotes</h1>
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <img 
+        src="/PeerNotes.png" 
+        alt="PeerNotes Logo" 
+        style={{ 
+          height: "100px"
+        }} 
+      />
+     <MainSearch />
+    </div>
     </>
   )
 }
