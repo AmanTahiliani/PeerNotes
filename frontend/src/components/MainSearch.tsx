@@ -1,5 +1,5 @@
 import React from 'react';
-import '../screens/MainScreenWrapper.css';
+import '../styles/MainScreenWrapper.css';
 
 const MainSearch: React.FC = () => {
   return (
