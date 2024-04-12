@@ -1,6 +1,6 @@
-import React, { useState, FormEvent } from 'react'; 
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
-import '../screens/MainScreenWrapper.css';
+import '../styles/MainScreenWrapper.css';
 
 interface Filters {
   professor: string;
@@ -27,16 +27,20 @@ const MainSearch: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    var input = filters.toString()
+    const input = filters.toString()
     const searchParams = new URLSearchParams(input)
     navigate(`/results?${searchParams}`);
   };
 
   return (
     <>
-    <div style={{ textAlign: 'center' }}>
-      <img src="/PeerNotes.png" alt="PeerNotes Logo" className="logo" />
-    </div>
+    <img
+      src="/PeerNotes.png" 
+      alt="PeerNotes Logo" 
+      style={{ 
+        height: "100px"
+      }} 
+    />
     <form onSubmit={handleSubmit} className="filter-container">
       <div className="filter-item">
         <label htmlFor="professors">Professors:</label>

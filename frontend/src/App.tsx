@@ -1,21 +1,49 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainSearch from './components/MainSearch';
-import Results from './components/Results';
+import "./styles/App.css";
+import { Link, useNavigate } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
+import { SessionContext, destroySessionCookie, getSessionCookie } from "./contexts/session";
+import { useState, useEffect, useContext } from "react";
 
-function App() {
+export default function App() {
+  const [session, setSession] = useState(getSessionCookie());
+  const navigate = useNavigate();
+
+  // Redirect to login if session is undefined
+  useEffect(
+    () => {
+      setSession(getSessionCookie());
+      if (session === undefined) {
+        navigate("/login");
+      }
+    },
+    [session, navigate]
+  ); 
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100px', gap: 15 }}>
-        </header>
-        <Routes>
-          <Route path="/" element={<MainSearch />} />
-          <Route path="/results" element={<Results />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <>
+      <SessionContext.Provider value={session}>
+          <Navbar />
+          <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
+            <Outlet />
+          </div>
+        </SessionContext.Provider>
+    </>
+  )
+}
+function Navbar() {
+  const session = useContext(SessionContext);
+
+  const links = session ? (
+    <>
+      <Link to="/">Home</Link>
+      <Link to="/login" onClick={destroySessionCookie}>Logout</Link>
+    </>
+  ): (
+      <Link to="/login">Login</Link>
+  )
+  return (
+    <nav>
+     {links}
+    </nav>
   );
 }
-
-export default App
