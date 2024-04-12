@@ -1,6 +1,6 @@
 import "./styles/App.css";
 import { Link, useNavigate } from 'react-router-dom';
-import MainSearch from './components/MainSearch';
+import { Outlet } from "react-router-dom";
 import { SessionContext, destroySessionCookie, getSessionCookie } from "./contexts/session";
 import { useState, useEffect, useContext } from "react";
 
@@ -24,14 +24,7 @@ export default function App() {
       <SessionContext.Provider value={session}>
           <Navbar />
           <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
-            <img
-              src="/PeerNotes.png" 
-              alt="PeerNotes Logo" 
-              style={{ 
-                height: "100px"
-              }} 
-            />
-            <MainSearch />
+            <Outlet />
           </div>
         </SessionContext.Provider>
     </>
