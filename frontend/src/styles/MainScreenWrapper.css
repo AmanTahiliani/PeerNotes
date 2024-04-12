@@ -15,8 +15,15 @@ html, body {
     justify-content: center;
     padding: 20px;
     background: #B1D4E0;
+    gap: 15;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* shadow */
+  }
+
+  .logo {
+    height: 100px; /* Adjust this value as needed */
+    width: auto; /* Keep the logo's aspect ratio */
+    margin-bottom: 15px; /* Gap between logo and search box */
   }
   
   .filter-item + .filter-item {

@@ -8,3 +8,17 @@ nav {
     color: black;
     background-color: white;
 }
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* If you're centering the content */
+    height: 100vh; /* Full height */
+    margin-top: -100px; /* Move up */
+  }
+
+  body {
+    background-color: #0C2D48;
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  }
+  

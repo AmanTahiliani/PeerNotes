@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Login from './screens/Login.tsx';
 import Signup from './screens/Signup.tsx';
+import Results from './components/Results.tsx';
+import MainSearch from './components/MainSearch.tsx';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,17 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       // add more routes here
+      {
+        path: "search",
+        element: <MainSearch />,
+      },
+      {
+        path: "results",
+        element: <Results/>,
+      },
     ]
   },
+  
   {
     path: "/login",
     element: <Login />,

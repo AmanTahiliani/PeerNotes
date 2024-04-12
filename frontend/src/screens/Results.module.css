@@ -1,0 +1,57 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #FFFFFF;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #145DA0;
+  }
+  
+  .logo {
+    height: 80px; /* Adjust according to preference */
+    margin-right: auto;
+  }
+  
+  
+  .resultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px; /* Adjust based on header height to ensure content doesn't overlap */
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  .resultsTable {
+    /* to be filled out */
+    width: 100%;
+  }
+  
+  
+  .searchAgainButton {
+    height: 50px;
+    padding: 4px 8px;
+    background-color: #0C2D48; 
+    color: white; 
+    border: none;
+    border-radius: 4px;
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    cursor: pointer;
+    margin-right: 35px;
+    margin-top: 15px;
+  }
+
+  .searchAgainButton:hover {
+    background-color: #B1D4E0; /* lighter shade for hover effect */
+  }
