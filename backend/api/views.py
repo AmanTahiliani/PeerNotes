@@ -112,15 +112,18 @@ class UpvoteFile(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, file_id):
+        user = request.user
         update_user_ip(request)
 
         try:
             file = File.objects.get(id=file_id)
-            file.points += 1
+            if file.downvotes.contains(user):
+                file.downvotes.remove(user)
+            file.upvotes.add(user)
             file.save()
             return Response(
                 {"msg": f"Upvoted {file.filename}", "file_points": file.points},
-                status=status.HTTP_200_OK,
+                status=status.HTTP_200_OK,  
             )
         except Exception as e:
             print(f"Error: {str(e)}")
@@ -135,11 +138,14 @@ class DownvoteFile(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, file_id):
+        user = request.user
         update_user_ip(request)
 
         try:
             file = File.objects.get(id=file_id)
-            file.points -= 1
+            if file.upvotes.contains(user):
+                file.upvotes.remove(user)
+            file.downvotes.add(user)
             file.save()
             return Response(
                 {"msg": f"Downvoted {file.filename}", "file_points": file.points},

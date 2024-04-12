@@ -58,7 +58,13 @@ class File(models.Model):
         Course, on_delete=models.SET_NULL, null=True, related_name="files"
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    points = models.IntegerField(default=0, blank=False)
+    upvotes = models.ManyToManyField(PeerUser, related_name="upvoted_file")
+    downvotes = models.ManyToManyField(PeerUser, related_name="downvoted_file")
+
+
+    @property
+    def points(self):
+        return self.upvotes.count() - self.downvotes.count()
 
     def __str__(self):
         return self.filename
