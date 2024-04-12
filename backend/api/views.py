@@ -5,10 +5,12 @@ from api.serializers import (
     ProfessorSerializer,
     SemesterSerializer,
     TopicSerializer,
+    UserSerializer,
 )
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.db import transaction
+from django.utils import timezone
 from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
@@ -105,6 +107,52 @@ class FileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
+class UpvoteFile(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, file_id):
+        update_user_ip(request)
+
+        try:
+            file = File.objects.get(id=file_id)
+            file.points += 1
+            file.save()
+            return Response(
+                {"msg": f"Upvoted {file.filename}", "file_points": file.points},
+                status=status.HTTP_200_OK,
+            )
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            return Response(
+                {"error": "Please enter valid file id"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+
+class DownvoteFile(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, file_id):
+        update_user_ip(request)
+
+        try:
+            file = File.objects.get(id=file_id)
+            file.points -= 1
+            file.save()
+            return Response(
+                {"msg": f"Downvoted {file.filename}", "file_points": file.points},
+                status=status.HTTP_200_OK,
+            )
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            return Response(
+                {"error": "Please enter valid file id"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+
 class RegisterFile(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -115,6 +163,7 @@ class RegisterFile(APIView):
         data = request.data
         try:
             with transaction.atomic():
+                user.last_poll = timezone.now()
                 required_fields = set(
                     ["filename", "topic", "semester", "professor", "course"]
                 )
@@ -166,7 +215,9 @@ class RegisterFile(APIView):
                     "course": file.course.name if file.course else None,
                     "professor": file.professor.name if file.professor else None,
                 }
+                user.points += 1
                 file.save()
+                user.save()
                 return Response(
                     response_data,
                     status=status.HTTP_201_CREATED,
@@ -178,9 +229,19 @@ class RegisterFile(APIView):
             )
 
 
+from django.utils import timezone
+from datetime import timedelta
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import File, PeerUser
+from .serializers import FileSerializer
+
+
 class FileFilterView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         try:
             # Extract filters from the query parameters
@@ -226,15 +287,90 @@ class FileFilterView(APIView):
 
             # Filter files based on active peers in the past hour
             active_peer_ids = PeerUser.objects.filter(
-                last_poll__gte=datetime.now() - timedelta(hours=1)
+                last_poll__gte=timezone.now() - timedelta(hours=1)
             ).values_list("id", flat=True)
-
             queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
 
+            # Sort files based on points column in descending order
+            queryset = queryset.order_by("-points")
+
+            # Serialize files
             serializer = FileSerializer(queryset, many=True)
+            # Loop through each serialized file to sort its peer_users
+            for file_data in serializer.data:
+                file_obj = File.objects.get(id=file_data["id"])
+                sorted_peer_users = sorted(
+                    file_obj.peer_users.all(), key=lambda x: x.points, reverse=True
+                )
+                file_data["peer_users"] = UserSerializer(
+                    sorted_peer_users, many=True
+                ).data
+
             return Response(serializer.data)
         except Exception as e:
             return Response(
                 {"error": f"Something went wrong: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+
+# class FileFilterView(APIView):
+#     authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated]
+#     def get(self, request, format=None):
+#         try:
+#             # Extract filters from the query parameters
+#             topic_id = request.query_params.get("topic")
+#             professor_id = request.query_params.get("professor")
+#             course_id = request.query_params.get("course")
+#             semester_id = request.query_params.get("semester")
+
+#             # Check if provided filter IDs exist
+#             if topic_id and not Topic.objects.filter(id=topic_id).exists():
+#                 return Response(
+#                     {"error": f"Topic with id {topic_id} does not exist"},
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+#             if professor_id and not Professor.objects.filter(id=professor_id).exists():
+#                 return Response(
+#                     {"error": f"Professor with id {professor_id} does not exist"},
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+#             if course_id and not Course.objects.filter(id=course_id).exists():
+#                 return Response(
+#                     {"error": f"Course with id {course_id} does not exist"},
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+#             if semester_id and not Semester.objects.filter(id=semester_id).exists():
+#                 return Response(
+#                     {"error": f"Semester with id {semester_id} does not exist"},
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+
+#             # Start with the base queryset
+#             queryset = File.objects.all()
+
+#             # Apply filters if they are provided
+#             if topic_id:
+#                 queryset = queryset.filter(topic__id=topic_id)
+#             if professor_id:
+#                 queryset = queryset.filter(professor__id=professor_id)
+#             if course_id:
+#                 queryset = queryset.filter(course__id=course_id)
+#             if semester_id:
+#                 queryset = queryset.filter(semester__id=semester_id)
+
+#             # Filter files based on active peers in the past hour
+#             active_peer_ids = PeerUser.objects.filter(
+#                 last_poll__gte=timezone.now() - timedelta(hours=1)
+#             ).values_list("id", flat=True)
+
+#             queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
+
+#             serializer = FileSerializer(queryset, many=True)
+#             return Response(serializer.data)
+#         except Exception as e:
+#             return Response(
+#                 {"error": f"Something went wrong: {str(e)}"},
+#                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+#             )

@@ -54,7 +54,17 @@ urlpatterns = [
         name="course-detail",
     ),
     path("api/files/", views.FileListCreateAPIView.as_view(), name="file-list"),
+    path(
+        "api/files/<int:file_id>/upvote/",
+        views.UpvoteFile.as_view(),
+        name="upvote-file",
+    ),
+    path(
+        "api/files/<int:file_id>/downvote/",
+        views.DownvoteFile.as_view(),
+        name="downvote-file",
+    ),
     path("api/files/<int:pk>/", views.FileDetailAPIView.as_view(), name="file-detail"),
-    path("api/files/filter/", views.FileFilterView.as_view(), name="file-filter-view"),
     path("api/register/", views.RegisterFile.as_view(), name="file-register"),
+    path("api/files/filter/", views.FileFilterView.as_view(), name="file-filter-view"),
 ]
