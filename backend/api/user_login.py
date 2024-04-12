@@ -18,7 +18,9 @@ class LoginView(APIView):
             user = authenticate(username=username, password=password)
             if user:
                 token, _ = Token.objects.get_or_create(user=user)
-                return Response({"token": token.key})
+                response = Response({"token": token.key}, status=status.HTTP_200_OK)
+                response.set_cookie("token", token.key)
+                return response
             else:
                 return Response(
                     {"error": "Invalid credentials"},
