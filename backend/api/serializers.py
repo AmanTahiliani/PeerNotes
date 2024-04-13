@@ -10,7 +10,7 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = PeerUser
-        fields = ["id", "username", "email", "ip_address"]
+        fields = ["id", "username", "email", "ip_address", "points"]
 
 
 class TopicSerializer(serializers.ModelSerializer):
