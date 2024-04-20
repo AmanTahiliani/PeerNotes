@@ -6,6 +6,7 @@ from django.db import models
 class PeerUser(AbstractUser):
     ip_address = models.GenericIPAddressField(blank=True, null=True)
     last_poll = models.DateTimeField(auto_now_add=True)
+    points = models.IntegerField(default=0, blank=False)
 
 
 class Topic(models.Model):
@@ -57,6 +58,13 @@ class File(models.Model):
         Course, on_delete=models.SET_NULL, null=True, related_name="files"
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    upvotes = models.ManyToManyField(PeerUser, related_name="upvoted_file")
+    downvotes = models.ManyToManyField(PeerUser, related_name="downvoted_file")
+
+
+    @property
+    def points(self):
+        return self.upvotes.count() - self.downvotes.count()
 
     def __str__(self):
         return self.filename

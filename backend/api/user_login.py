@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from api.utils.get_client_ip import get_client_ip
+from django.utils import timezone
 
 
 class LoginView(APIView):
@@ -18,6 +19,7 @@ class LoginView(APIView):
             user = authenticate(username=username, password=password)
             if user:
                 token, _ = Token.objects.get_or_create(user=user)
+                user.last_poll = timezone.now()
                 response = Response({"token": token.key}, status=status.HTTP_200_OK)
                 response.set_cookie("token", token.key)
                 return response
@@ -66,6 +68,7 @@ class PollOnlineView(APIView):
             user = request.user
             ip_address = get_client_ip(request)
             user.ip_address = ip_address
+            user.last_poll = timezone.now()
             user.save()
             return Response(
                 {
