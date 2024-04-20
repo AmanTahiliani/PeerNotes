@@ -116,8 +116,8 @@ const MainSearch: React.FC = () => {
           <label htmlFor="professors">Professors:</label>
           <select id="professors" name="professor" value={filters.professor} onChange={handleChange}>
             <option value="">Select a Professor</option>
-            {professors.map((professor, index) => (
-              <option key={index} value={professor}>{professor}</option>
+            {professors.map((professor) => (
+              <option key={professor.id} value={professor.id}>{professor.name}</option>
             ))}
           </select>
         </div>
@@ -125,8 +125,8 @@ const MainSearch: React.FC = () => {
           <label htmlFor="courses">Course:</label>
           <select id="courses" name="course" value={filters.course} onChange={handleChange}>
             <option value="">Select a Course</option>
-            {courses.map((course, index) => (
-              <option key={index} value={course}>{course}</option>
+            {courses.map((course) => (
+              <option key={course.id} value={course.id}>{course.name}</option>
             ))}
           </select>
         </div>
@@ -134,8 +134,8 @@ const MainSearch: React.FC = () => {
           <label htmlFor="topics">Topic:</label>
           <select id="topics" name="topic" value={filters.topic} onChange={handleChange}>
             <option value="">Select a Topic</option>
-            {topics.map((topic, index) => (
-              <option key={index} value={topic}>{topic}</option>
+            {topics.map((topic) => (
+              <option key={topic.id} value={topic.id}>{topic.name}</option>
             ))}
           </select>
         </div>
