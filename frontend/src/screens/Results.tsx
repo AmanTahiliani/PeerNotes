@@ -40,7 +40,7 @@ const Results: React.FC = () => {
   }, [location]);
 
   const handleSearchAgain = () => {
-    navigate('/');
+    navigate('/search');
   };
 
   if (isLoading) return <div>Loading...</div>;
