@@ -28,14 +28,29 @@ const MainSearch: React.FC = () => {
     fetchTopics();
   }, []);
 
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('authToken');
+    console.log("Using token for API call:", token);
+    return {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    };
+  };
+
   const fetchProfessors = async () => {
     try {
-      const response = await fetch('{{host}}/api/professors', {
+      const response = await fetch('http://localhost:8000/api/professors', {
         method: 'GET',
-        credentials: 'include',
+        //credentials: 'include',
+        headers: getAuthHeaders(),
       });
       const data = await response.json();
-      setProfessors(data);
+      //setProfessors(data);
+      if (Array.isArray(data)) {
+        setProfessors(data);
+      } else {
+        console.error('Data fetched is not an array:', data);
+      }
     } catch (error) {
       console.error('Error fetching professors:', error);
     }
@@ -43,12 +58,18 @@ const MainSearch: React.FC = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('{{host}}/api/courses', {
+      const response = await fetch('http://localhost:8000/api/courses', {
         method: 'GET',
-        credentials: 'include',
+        //credentials: 'include',
+        headers: getAuthHeaders(),
       });
       const data = await response.json();
-      setCourses(data);
+      //setCourses(data);
+      if (Array.isArray(data)) {
+        setCourses(data);
+      } else {
+        console.error('Data fetched is not an array:', data);
+      }
     } catch (error) {
       console.error('Error fetching courses:', error);
     }
@@ -56,12 +77,18 @@ const MainSearch: React.FC = () => {
 
   const fetchTopics = async () => {
     try {
-      const response = await fetch('{{host}}/api/topics', {
+      const response = await fetch('http://localhost:8000/api/topics', {
         method: 'GET',
-        credentials: 'include',
+        //credentials: 'include',
+        headers: getAuthHeaders(),
       });
       const data = await response.json();
-      setTopics(data);
+      if (Array.isArray(data)) {
+        setTopics(data);
+      } else {
+        console.error('Data fetched is not an array:', data);
+      }
+      //setTopics(data);
     } catch (error) {
       console.error('Error fetching topics:', error);
     }

@@ -21,9 +21,20 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
     })
-    .then(() => {
-      navigate('/');
+    .then(response => response.json())
+    .then(response => response.json())
+    .then(data => {
+      console.log("Login response data:", data);
+      if (data.token) {
+          localStorage.setItem('authToken', data.token);
+          navigate('/search');
+      } else {
+          console.error('No token received:', data);
+      }
     })
+    // .then(() => {
+    //   navigate('/');
+    // })
     .catch((error) => {
         console.error('Error:', error);
     });
