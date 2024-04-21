@@ -1,4 +1,4 @@
-from api.models import Course, File, Professor, Semester, Topic, PeerUser
+from api.models import Course, File, Professor, Semester, Topic, PeerUser, UserReport
 from api.serializers import (
     CourseSerializer,
     FileSerializer,
@@ -7,13 +7,13 @@ from api.serializers import (
     TopicSerializer,
     UserSerializer,
 )
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.contrib.auth import authenticate
 from django.db import transaction
+from django.db.models import Count, Value, F, IntegerField
 from django.utils import timezone
 from rest_framework import generics, status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -123,7 +123,7 @@ class UpvoteFile(APIView):
             file.save()
             return Response(
                 {"msg": f"Upvoted {file.filename}", "file_points": file.points},
-                status=status.HTTP_200_OK,  
+                status=status.HTTP_200_OK,
             )
         except Exception as e:
             print(f"Error: {str(e)}")
@@ -235,15 +235,6 @@ class RegisterFile(APIView):
             )
 
 
-from django.utils import timezone
-from datetime import timedelta
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .models import File, PeerUser
-from .serializers import FileSerializer
-
-
 class FileFilterView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -251,6 +242,7 @@ class FileFilterView(APIView):
     def get(self, request, format=None):
         try:
             # Extract filters from the query parameters
+            update_user_ip(request)
             topic_id = request.query_params.get("topic")
             professor_id = request.query_params.get("professor")
             course_id = request.query_params.get("course")
@@ -291,19 +283,26 @@ class FileFilterView(APIView):
             if semester_id:
                 queryset = queryset.filter(semester__id=semester_id)
 
+            queryset = queryset.annotate(
+                upvote_count=Count("upvotes"), downvote_count=Count("downvotes")
+            ).order_by(F("downvote_count") - F("upvote_count"))
+
             # Filter files based on active peers in the past hour
             active_peer_ids = PeerUser.objects.filter(
                 last_poll__gte=timezone.now() - timedelta(hours=1)
             ).values_list("id", flat=True)
             queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
 
-            # Sort files based on points column in descending order
-            queryset = queryset.order_by("-points")
-
-            # Serialize files
             serializer = FileSerializer(queryset, many=True)
             # Loop through each serialized file to sort its peer_users
-            for file_data in serializer.data:
+
+            try:
+                serialized_data = serializer.data
+                print(serialized_data)
+            except Exception as e:
+                print(str(e))
+            for file_data in serialized_data:
+                print(file_data)
                 file_obj = File.objects.get(id=file_data["id"])
                 sorted_peer_users = sorted(
                     file_obj.peer_users.all(), key=lambda x: x.points, reverse=True
@@ -312,9 +311,72 @@ class FileFilterView(APIView):
                     sorted_peer_users, many=True
                 ).data
 
-            return Response(serializer.data)
+            return Response(serialized_data)
         except Exception as e:
             return Response(
                 {"error": f"Something went wrong: {str(e)}"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+
+class ReportUserView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        data = request.data
+        update_user_ip(request)
+        try:
+            assert "file_id" in data
+            assert "user_id" in data
+            assert "description" in data
+        except AssertionError as e:
+            return Response(
+                {"error": f"Missing Parameters. {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            file = File.objects.get(id=data["file_id"])
+            malicious_user = PeerUser.objects.get(id=data["user_id"])
+            reporting_user = request.user
+            description = data["description"]
+        except Exception as e:
+            return Response(
+                {"error": f"Missing/Incorrect Parameters. {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        existing_user_report_queryset = UserReport.objects.filter(
+            user=malicious_user, file=file, reporting_user=reporting_user
+        )
+
+        if len(existing_user_report_queryset):
+            existing_report = existing_user_report_queryset.first()
+            existing_report.description = description
+            existing_report.save()
+            return Response(
+                {
+                    "msg": "User report already exists for this file. Updated description"
+                },
+                status=status.HTTP_208_ALREADY_REPORTED,
+            )
+
+        if (
+            file not in malicious_user.owned_files.all()
+            or file not in malicious_user.shared_files.all()
+        ):
+            return Response(
+                {"error": "User does not own or host the file reported"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        UserReport.objects.create(
+            user=malicious_user,
+            reporting_user=reporting_user,
+            file=file,
+            description=description,
+        )
+        malicious_user.points -= 1
+        malicious_user.save()
+        return Response({"msg": "Report Created!"}, status=status.HTTP_201_CREATED)

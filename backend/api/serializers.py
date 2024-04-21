@@ -46,4 +46,17 @@ class FileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        fields = "__all__"
+        fields = [
+            "id",
+            "filename",
+            "points",
+            "original_author",
+            "peer_users",
+            "topic",
+            "professor",
+            "semester",
+            "course",
+            "created_at",
+            "upvotes",
+            "downvotes",
+        ]

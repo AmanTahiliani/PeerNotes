@@ -61,10 +61,28 @@ class File(models.Model):
     upvotes = models.ManyToManyField(PeerUser, related_name="upvoted_file")
     downvotes = models.ManyToManyField(PeerUser, related_name="downvoted_file")
 
-
     @property
     def points(self):
         return self.upvotes.count() - self.downvotes.count()
 
     def __str__(self):
         return self.filename
+
+
+class UserReport(models.Model):
+    user = models.ForeignKey(
+        PeerUser, on_delete=models.SET_NULL, null=True, related_name="user_report"
+    )
+    reporting_user = models.ForeignKey(
+        PeerUser,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="user_report_generated",
+    )
+    description = models.TextField(blank=False, null=False, max_length=300)
+    file = models.ForeignKey(
+        File, on_delete=models.CASCADE, null=True, related_name="file_report"
+    )
+
+    def __str__(self) -> str:
+        return f"{self.user}:{self.file}:{self.reporting_user}"

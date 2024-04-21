@@ -1,3 +1,4 @@
+from typing import Any
 from django.utils import timezone
 
 
@@ -16,3 +17,15 @@ def update_user_ip(request):
     user.ip_address = ip_address
     user.last_poll = timezone.now()
     user.save()
+
+
+class PollMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print("Updating user last online and IP address")
+        update_user_ip(request)
+        response = self.get_response(request)
+
+        return response
