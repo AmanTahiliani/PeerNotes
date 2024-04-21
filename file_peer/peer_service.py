@@ -45,13 +45,12 @@ def request_file():
 
     if response.status_code == 200:
         if os.path.exists(file_path):
-
             return "File with name already exists", 200
         
         with open(file_path, 'wb') as f:
             f.write(response.content)
         print("File downloaded successfully")
-        return f'File Downloaded to location to location {file_path}', 
+        return f'File Downloaded to location to location {file_path}', 200
     else:
         error = response.text
         print("Error:", error)
