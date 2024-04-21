@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import Login from './screens/Login.tsx';
 import Signup from './screens/Signup.tsx';
-import Results from './components/Results.tsx';
-import MainSearch from './components/MainSearch.tsx';
+import Results from './screens/Results.tsx';
+import MainSearch from './screens/MainSearch.tsx';
 
 const router = createBrowserRouter([
   {

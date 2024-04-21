@@ -31,12 +31,26 @@ export default function App() {
   )
 }
 function Navbar() {
+  const linkStyle = {
+    textDecoration: 'none', 
+    color: 'black',
+    background: '#B1D4E0', 
+    padding: '8px 16px', 
+    borderRadius: '5px',
+    margin: '0 5px' 
+  };
   const session = useContext(SessionContext);
+  const logout = () => {
+    destroySessionCookie();
+    window.location.reload();
+  }
 
   const links = session ? (
     <>
-      <Link to="/">Home</Link>
-      <Link to="/login" onClick={destroySessionCookie}>Logout</Link>
+      <img src="/PeerNotes.png" alt="PeerNotes Logo" style={{ height: '60px', marginRight: '10px' }} />
+      <Link to="/" style={linkStyle}>Home</Link>
+      <Link to="/search" style={linkStyle}>Search</Link>
+      <a onClick={logout} style={linkStyle}>Logout</a>
     </>
   ): (
       <Link to="/login">Login</Link>

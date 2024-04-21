@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-rh0s*u8&#4$uugtt10cxbifjriaz%@&p1w!)c2=y^undd2*nx5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.20.4.109", "73.7.29.136", "localhost"]
+ALLOWED_HOSTS = ["10.20.4.109", "73.7.29.136", "localhost", "127.0.0.1", "http://localhost:5173"]
+# ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -50,6 +52,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -57,7 +60,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "peer_notes.urls"
@@ -134,6 +136,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "api.PeerUser"
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_METHODS = True
 # CORS_ALLOWED_ORIGINS = [
 # "http://localhost:5173"
 # ]

@@ -8,7 +8,7 @@ export const useSessionRedirect = () => {
   // Redirect to home if session is defined
   useEffect(() => {
     if (session !== undefined) {
-        navigate('/');
+      navigate('/search');
     }
   }, [session, navigate])
 }

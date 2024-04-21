@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from '../screens/Results.module.css'; // Make sure this path is correct
+import styles from '../styles/Results.module.css'; // Make sure this path is correct
 
 interface File {
   id: string;
@@ -40,7 +40,7 @@ const Results: React.FC = () => {
   }, [location]);
 
   const handleSearchAgain = () => {
-    navigate('/');
+    navigate('/search');
   };
 
   if (isLoading) return <div>Loading...</div>;
