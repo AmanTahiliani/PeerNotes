@@ -50,7 +50,6 @@ const Results: React.FC = () => {
           <p>Loading...</p>
         ) : files.length ? (
             files.map((file) => (
-            <>
             <div key={file.id} className={styles.fileCard}>
               <h3>{file.filename}</h3>
               <p>Course: {file.course.name} {file.course.number}</p>
@@ -58,16 +57,8 @@ const Results: React.FC = () => {
               <p>Semester: {file.semester.name}</p>
               <p>Upvotes: {file.upvotes.length}</p>
               <p>Downvotes: {file.downvotes.length}</p>
+              <p><a href="">Download</a></p>
             </div>
-            <div key={file.id} className={styles.fileCard}>
-              <h3>{file.filename}</h3>
-              <p>Course: {file.course.name} {file.course.number}</p>
-              <p>Professor: {file.professor.name}</p>
-              <p>Semester: {file.semester.name}</p>
-              <p>Upvotes: {file.upvotes.length}</p>
-              <p>Downvotes: {file.downvotes.length}</p>
-                </div>
-                </>
           ))
         ) : (
           <p>No results found.</p>
