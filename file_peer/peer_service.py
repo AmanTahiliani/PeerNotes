@@ -1,8 +1,21 @@
 from flask import Flask, send_file, request
 import requests
+import socket
 import os
 
 app = Flask(__name__)
+
+@app.route('/ip', methods=["GET"])
+def get_internal_ip():
+    internal_ip = None
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80)) 
+        internal_ip = s.getsockname()[0]
+        s.close()
+    except Exception as e:
+        print("Error:", e)
+    return internal_ip, 200
 
 @app.route('/send', methods=['GET'])
 def send():
@@ -32,13 +45,8 @@ def request_file():
 
     if response.status_code == 200:
         if os.path.exists(file_path):
-            # If it does, generate a new filename
-            i = 1
-            beg, end = file_path.split('.')
-            while os.path.exists(f'{beg}_{i}.{end}'):
-                i += 1
-            file_path = f'{beg}_{i}.{end}'
-            print("File with name already exists")
+
+            return "File with name already exists", 200
         
         with open(file_path, 'wb') as f:
             f.write(response.content)
@@ -51,4 +59,4 @@ def request_file():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, host= '0.0.0.0', port=8080)
