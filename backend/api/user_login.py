@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from api.utils.get_client_ip import get_client_ip
+from api.utils.get_client_ip import get_client_ip, PollMiddleware
 from django.utils import timezone
 
 

@@ -65,6 +65,7 @@ urlpatterns = [
         name="downvote-file",
     ),
     path("api/files/<int:pk>/", views.FileDetailAPIView.as_view(), name="file-detail"),
+    path("api/report_user/", views.ReportUserView.as_view(), name="report-user"),
     path("api/register/", views.RegisterFile.as_view(), name="file-register"),
     path("api/files/filter/", views.FileFilterView.as_view(), name="file-filter-view"),
 ]
