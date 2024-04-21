@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MainScreenWrapper.css';
-import { getSessionCookie } from '../contexts/session';
+import { getAuthHeaders } from '../utils/getAuthHeaders';
 import { Professor, Course, Topic } from "../types/types";
 
 interface Filters extends Record<string, string> {
@@ -30,15 +30,6 @@ const MainSearch: React.FC = () => {
     fetchTopics();
   }, []);
 
-  const getAuthHeaders = () => {
-    const token = getSessionCookie();
-    // const token = localStorage.getItem('authToken');
-    console.log("Using token for API call:", token);
-    return {
-      'Authorization': `Token ${token}`,
-      'Content-Type': 'application/json'
-    };
-  };
 
   const fetchProfessors = async () => {
     try {

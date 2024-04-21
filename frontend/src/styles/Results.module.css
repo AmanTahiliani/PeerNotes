@@ -27,17 +27,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 100px; /* Adjust based on header height to ensure content doesn't overlap */
+
     margin: auto;
-    width: 90%;
-    max-width: 600px;
+    width: 100vh;
+    gap: 1rem;
   }
   
   .resultsTable {
     /* to be filled out */
     width: 100%;
   }
-  
+  .fileCard p {
+    background-color: #1f4f7c;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  .fileCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 1rem;
+    background-color: #145DA0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 100vh;
+  }
   
   .searchAgainButton {
     height: 50px;
