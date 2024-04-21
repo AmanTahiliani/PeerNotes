@@ -1,0 +1,1522 @@
+[
+    {
+        "number": "CS 1100",
+        "name": "Freshman Leap Seminar"
+    },
+    {
+        "number": "CS 1171",
+        "name": "Computing in MATLAB"
+    },
+    {
+        "number": "CS 1301",
+        "name": "Intro to Computing"
+    },
+    {
+        "number": "CS 1301R",
+        "name": "CS 1301 Recitation"
+    },
+    {
+        "number": "CS 1315",
+        "name": "Intro Media Computation"
+    },
+    {
+        "number": "CS 1315R",
+        "name": "CS 1315 Recitation"
+    },
+    {
+        "number": "CS 1316",
+        "name": "Rep Structure & Behavior"
+    },
+    {
+        "number": "CS 1331",
+        "name": "Intro-Object Orient Prog"
+    },
+    {
+        "number": "CS 1331R",
+        "name": "CS 1331 Recitation"
+    },
+    {
+        "number": "CS 1332",
+        "name": "Data Struct & Algorithms"
+    },
+    {
+        "number": "CS 1332R",
+        "name": "CS 1332 Recitation"
+    },
+    {
+        "number": "CS 1371",
+        "name": "Computing for Engineers"
+    },
+    {
+        "number": "CS 1371R",
+        "name": "CS 1371 Recitation"
+    },
+    {
+        "number": "CS 1372",
+        "name": "Program Design for Engrs"
+    },
+    {
+        "number": "CS 1801",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 1802",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 1803",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 1804",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 1805",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 1XXX",
+        "name": "Computer Sci Elective"
+    },
+    {
+        "number": "CS 2050",
+        "name": "Intro Discrete Math CS"
+    },
+    {
+        "number": "CS 2050R",
+        "name": "CS 2050 Recitation"
+    },
+    {
+        "number": "CS 2051",
+        "name": "Honors Discrete Math CS"
+    },
+    {
+        "number": "CS 2110",
+        "name": "Computer Organiz&Program"
+    },
+    {
+        "number": "CS 2200",
+        "name": "Systems and Networks"
+    },
+    {
+        "number": "CS 2261",
+        "name": "Media Device Architectur"
+    },
+    {
+        "number": "CS 2316",
+        "name": "Data Input/Manipulation"
+    },
+    {
+        "number": "CS 2316R",
+        "name": "CS 2316 Recitation"
+    },
+    {
+        "number": "CS 2335",
+        "name": "Software Practicum"
+    },
+    {
+        "number": "CS 2340",
+        "name": "Objects and Design"
+    },
+    {
+        "number": "CS 2345",
+        "name": "Adv Practical O-O Prog"
+    },
+    {
+        "number": "CS 2600",
+        "name": "Knowledge Rep & Process"
+    },
+    {
+        "number": "CS 2698",
+        "name": "Research Assistantship"
+    },
+    {
+        "number": "CS 2699",
+        "name": "Undergraduate Research"
+    },
+    {
+        "number": "CS 2701",
+        "name": "Startup Lab"
+    },
+    {
+        "number": "CS 2701R",
+        "name": "CS 2701 Recitation"
+    },
+    {
+        "number": "CS 2801",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 2802",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 2803",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 2804",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 2805",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 2XXX",
+        "name": "Computer Sci Elective"
+    },
+    {
+        "number": "CS 3001",
+        "name": "Computing & Society"
+    },
+    {
+        "number": "CS 3101",
+        "name": "Comp Sci Ventures"
+    },
+    {
+        "number": "CS 3210",
+        "name": "Design-Operating Systems"
+    },
+    {
+        "number": "CS 3220",
+        "name": "Processor Design"
+    },
+    {
+        "number": "CS 3240",
+        "name": "Languages and Computation"
+    },
+    {
+        "number": "CS 3251",
+        "name": "Computer Networking I"
+    },
+    {
+        "number": "CS 3300",
+        "name": "Intro to Software Engr"
+    },
+    {
+        "number": "CS 3311",
+        "name": "Project Design"
+    },
+    {
+        "number": "CS 3312",
+        "name": "Project Implementation"
+    },
+    {
+        "number": "CS 3451",
+        "name": "Computer Graphics"
+    },
+    {
+        "number": "CS 3510",
+        "name": "Dsgn&Analysis-Algorithms"
+    },
+    {
+        "number": "CS 3511",
+        "name": "Algorithms Honors"
+    },
+    {
+        "number": "CS 3600",
+        "name": "Intro-Artificial Intell"
+    },
+    {
+        "number": "CS 3630",
+        "name": "Intro-Perception&Robotic"
+    },
+    {
+        "number": "CS 3651",
+        "name": "Prototyping Intelligent Device"
+    },
+    {
+        "number": "CS 3651R",
+        "name": "CS 3651 Recitation"
+    },
+    {
+        "number": "CS 3743",
+        "name": "Emerging Technologies"
+    },
+    {
+        "number": "CS 3744",
+        "name": "Mangn Prod Serv Tech Dev"
+    },
+    {
+        "number": "CS 3750",
+        "name": "User Interface Design"
+    },
+    {
+        "number": "CS 3751",
+        "name": "Intro UI Design"
+    },
+    {
+        "number": "CS 3790",
+        "name": "Intro-Cognitive Science"
+    },
+    {
+        "number": "CS 3801",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3802",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3803",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3804",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3805",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3873",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 3XXX",
+        "name": "Computer Sci"
+    },
+    {
+        "number": "CS 4001",
+        "name": "Computing & Society"
+    },
+    {
+        "number": "CS 4002",
+        "name": "Robots and Society"
+    },
+    {
+        "number": "CS 4003",
+        "name": "AI Ethics and Society"
+    },
+    {
+        "number": "CS 4005",
+        "name": "Next Gen Computing Tech"
+    },
+    {
+        "number": "CS 4010",
+        "name": "Intro to Computer Law"
+    },
+    {
+        "number": "CS 4052",
+        "name": "Systems Analysis& Design"
+    },
+    {
+        "number": "CS 4057",
+        "name": "Bus Process Analy&Design"
+    },
+    {
+        "number": "CS 4117",
+        "name": "Intro Malware Rev Eng"
+    },
+    {
+        "number": "CS 4210",
+        "name": "Adv Operating Systems"
+    },
+    {
+        "number": "CS 4220",
+        "name": "Embedded Systems"
+    },
+    {
+        "number": "CS 4220R",
+        "name": "CS 4220 Recitation"
+    },
+    {
+        "number": "CS 4233",
+        "name": "Parallel Comp Arch"
+    },
+    {
+        "number": "CS 4235",
+        "name": "Intro to Info Security"
+    },
+    {
+        "number": "CS 4237",
+        "name": "Comp & Network Security"
+    },
+    {
+        "number": "CS 4238",
+        "name": "Computer Sys Security"
+    },
+    {
+        "number": "CS 4239",
+        "name": "Enterprise Cyber Mgt"
+    },
+    {
+        "number": "CS 4240",
+        "name": "Compilers & Interpreters"
+    },
+    {
+        "number": "CS 4245",
+        "name": "Intro Data Mining & Anal"
+    },
+    {
+        "number": "CS 4251",
+        "name": "Computer Networking II"
+    },
+    {
+        "number": "CS 4255",
+        "name": "Intro-Network Management"
+    },
+    {
+        "number": "CS 4260",
+        "name": "Telecommunications Sys"
+    },
+    {
+        "number": "CS 4261",
+        "name": "Mobile Apps & Svcs"
+    },
+    {
+        "number": "CS 4262",
+        "name": "Network Security"
+    },
+    {
+        "number": "CS 4263",
+        "name": "Psychol of Cybersecurity"
+    },
+    {
+        "number": "CS 4265",
+        "name": "Intro to Blockchain"
+    },
+    {
+        "number": "CS 4270",
+        "name": "Data Communications Lab"
+    },
+    {
+        "number": "CS 4280",
+        "name": "Survey-Telecom & the Law"
+    },
+    {
+        "number": "CS 4290",
+        "name": "Advanced Computer Org"
+    },
+    {
+        "number": "CS 4320",
+        "name": "Software Processes"
+    },
+    {
+        "number": "CS 4330",
+        "name": "Software Applications"
+    },
+    {
+        "number": "CS 4342",
+        "name": "Software Generation"
+    },
+    {
+        "number": "CS 4365",
+        "name": "Intro Enterprise Comp"
+    },
+    {
+        "number": "CS 4392",
+        "name": "Programming Languages"
+    },
+    {
+        "number": "CS 4400",
+        "name": "Intr to Database Systems"
+    },
+    {
+        "number": "CS 4420",
+        "name": "Database Sys Implement"
+    },
+    {
+        "number": "CS 4423",
+        "name": "Adv Database Systems"
+    },
+    {
+        "number": "CS 4432",
+        "name": "Information Systems Dsgn"
+    },
+    {
+        "number": "CS 4440",
+        "name": "Database Technologies"
+    },
+    {
+        "number": "CS 4452",
+        "name": "Human-Centered Computing"
+    },
+    {
+        "number": "CS 4455",
+        "name": "Video Game Design"
+    },
+    {
+        "number": "CS 4460",
+        "name": "Intro Info Visualization"
+    },
+    {
+        "number": "CS 4460R",
+        "name": "CS 4460 Recitation"
+    },
+    {
+        "number": "CS 4464",
+        "name": "Computational Journalism"
+    },
+    {
+        "number": "CS 4470",
+        "name": "User Interface Software"
+    },
+    {
+        "number": "CS 4472",
+        "name": "Design of Online Comm"
+    },
+    {
+        "number": "CS 4475",
+        "name": "Comp Photography"
+    },
+    {
+        "number": "CS 4476",
+        "name": "Intro to Computer Vision"
+    },
+    {
+        "number": "CS 4480",
+        "name": "Digital Video Special FX"
+    },
+    {
+        "number": "CS 4488",
+        "name": "Procedural Content Gen"
+    },
+    {
+        "number": "CS 4495",
+        "name": "Computer Vision"
+    },
+    {
+        "number": "CS 4496",
+        "name": "Computer Animation"
+    },
+    {
+        "number": "CS 4497",
+        "name": "Comp Aesthetics"
+    },
+    {
+        "number": "CS 4510",
+        "name": "Automata and Complexity"
+    },
+    {
+        "number": "CS 4520",
+        "name": "Approximation Algs"
+    },
+    {
+        "number": "CS 4530",
+        "name": "Randomized Algs"
+    },
+    {
+        "number": "CS 4540",
+        "name": "Advanced Algs"
+    },
+    {
+        "number": "CS 4550",
+        "name": "Scientific Visualization"
+    },
+    {
+        "number": "CS 4560",
+        "name": "Verification of Systems"
+    },
+    {
+        "number": "CS 4590",
+        "name": "Computer Audio"
+    },
+    {
+        "number": "CS 4605",
+        "name": "Mobile&Ubiquitous Comp"
+    },
+    {
+        "number": "CS 4611",
+        "name": "AI Problem Solving"
+    },
+    {
+        "number": "CS 4613",
+        "name": "Knowledge Systems Engr"
+    },
+    {
+        "number": "CS 4615",
+        "name": "Knowledge-Based Modl&Dgn"
+    },
+    {
+        "number": "CS 4616",
+        "name": "Pattern Recognition"
+    },
+    {
+        "number": "CS 4622",
+        "name": "Case-Based Reasoning"
+    },
+    {
+        "number": "CS 4625",
+        "name": "Intel & Interactive Sys"
+    },
+    {
+        "number": "CS 4632",
+        "name": "Adv Intelligent Robotics"
+    },
+    {
+        "number": "CS 4635",
+        "name": "Knowledge-Based AI"
+    },
+    {
+        "number": "CS 4641",
+        "name": "Machine Learning"
+    },
+    {
+        "number": "CS 4644",
+        "name": "Deep Learning"
+    },
+    {
+        "number": "CS 4646",
+        "name": "Mach Learn for Trading"
+    },
+    {
+        "number": "CS 4649",
+        "name": "Robot Intelli Planning"
+    },
+    {
+        "number": "CS 4650",
+        "name": "Natural Language"
+    },
+    {
+        "number": "CS 4660",
+        "name": "Educational Technology"
+    },
+    {
+        "number": "CS 4665",
+        "name": "Educ Tech: Dsgn & Eval"
+    },
+    {
+        "number": "CS 4670",
+        "name": "CSCL"
+    },
+    {
+        "number": "CS 4675",
+        "name": "Internet Sys & Services"
+    },
+    {
+        "number": "CS 4685",
+        "name": "Pervasive Sys Networking"
+    },
+    {
+        "number": "CS 4690",
+        "name": "Empirical Methods in HCI"
+    },
+    {
+        "number": "CS 4698",
+        "name": "Research Assistantship"
+    },
+    {
+        "number": "CS 4699",
+        "name": "Undergraduate Research"
+    },
+    {
+        "number": "CS 4710",
+        "name": "CS for Bioinformatics"
+    },
+    {
+        "number": "CS 4723",
+        "name": "Inter Capstone Design"
+    },
+    {
+        "number": "CS 4725",
+        "name": "Info Security Policies"
+    },
+    {
+        "number": "CS 4726",
+        "name": "Privacy Tech Policy Law"
+    },
+    {
+        "number": "CS 4731",
+        "name": "Game AI"
+    },
+    {
+        "number": "CS 4741",
+        "name": "Int Mgt Dev - Proj Prep"
+    },
+    {
+        "number": "CS 4742",
+        "name": "Comp & Mgt Cap Proj"
+    },
+    {
+        "number": "CS 4745",
+        "name": "Info&Com Tech&Global Dev"
+    },
+    {
+        "number": "CS 4752",
+        "name": "Phil Issues-Computation"
+    },
+    {
+        "number": "CS 4770",
+        "name": "Mixed Reality Design"
+    },
+    {
+        "number": "CS 4791",
+        "name": "Integrative Proj-Cog Sci"
+    },
+    {
+        "number": "CS 4792",
+        "name": "Dsgn Proj-Cognitive Sci"
+    },
+    {
+        "number": "CS 4793",
+        "name": "Perspectives-Cog Science"
+    },
+    {
+        "number": "CS 4795",
+        "name": "GPU Prog for Video Games"
+    },
+    {
+        "number": "CS 4801",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4802",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4803",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4804",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4805",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4816",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4851",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4853",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4854",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4863",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4873",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4883",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4893",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 4901",
+        "name": "Spec Prob-Computer Sci"
+    },
+    {
+        "number": "CS 4902",
+        "name": "Spec Prob-Computer Sci"
+    },
+    {
+        "number": "CS 4903",
+        "name": "Spec Prob-Computer Sci"
+    },
+    {
+        "number": "CS 4911",
+        "name": "Design Capstone Project"
+    },
+    {
+        "number": "CS 4912",
+        "name": "Design Capstone Project"
+    },
+    {
+        "number": "CS 4980",
+        "name": "Research Capstone Proj"
+    },
+    {
+        "number": "CS 4XXX",
+        "name": "Computer Sci Elective"
+    },
+    {
+        "number": "CS 6010",
+        "name": "Principles of Design"
+    },
+    {
+        "number": "CS 6035",
+        "name": "Intro To Info Security"
+    },
+    {
+        "number": "CS 6150",
+        "name": "Computing For Good"
+    },
+    {
+        "number": "CS 6200",
+        "name": "Graduate Intro to OS"
+    },
+    {
+        "number": "CS 6210",
+        "name": "Adv Operating Systems"
+    },
+    {
+        "number": "CS 6211",
+        "name": "Sys Design Cloud Comput"
+    },
+    {
+        "number": "CS 6220",
+        "name": "Big Data Sys & Analytics"
+    },
+    {
+        "number": "CS 6230",
+        "name": "High Perf Parallel Comp"
+    },
+    {
+        "number": "CS 6235",
+        "name": "Real-Time Systems"
+    },
+    {
+        "number": "CS 6238",
+        "name": "Secure Computer Systems"
+    },
+    {
+        "number": "CS 6241",
+        "name": "Compiler Design"
+    },
+    {
+        "number": "CS 6245",
+        "name": "Parallelizing Compilers"
+    },
+    {
+        "number": "CS 6246",
+        "name": "Object-Oriented Systems"
+    },
+    {
+        "number": "CS 6250",
+        "name": "Computer Networks"
+    },
+    {
+        "number": "CS 6255",
+        "name": "Network Management"
+    },
+    {
+        "number": "CS 6260",
+        "name": "Applied Cryptography"
+    },
+    {
+        "number": "CS 6261",
+        "name": "Cyber Incident Response"
+    },
+    {
+        "number": "CS 6262",
+        "name": "Network Security"
+    },
+    {
+        "number": "CS 6263",
+        "name": "Intro Cyber Phys Sys Sec"
+    },
+    {
+        "number": "CS 6264",
+        "name": "Infosec Labs: Defenses"
+    },
+    {
+        "number": "CS 6265",
+        "name": "Info Sec Lab Binexp"
+    },
+    {
+        "number": "CS 6266",
+        "name": "Info Security Practicum"
+    },
+    {
+        "number": "CS 6267",
+        "name": "Critical Infrastructures"
+    },
+    {
+        "number": "CS 6268",
+        "name": "Psychol of Cybersecurity"
+    },
+    {
+        "number": "CS 6269",
+        "name": "Formal Info Assur Model"
+    },
+    {
+        "number": "CS 6280",
+        "name": "Eval Communication Nets"
+    },
+    {
+        "number": "CS 6290",
+        "name": "High Perform Comput Arch"
+    },
+    {
+        "number": "CS 6291",
+        "name": "Embedded Software Opt."
+    },
+    {
+        "number": "CS 6300",
+        "name": "Software Dev Process"
+    },
+    {
+        "number": "CS 6301",
+        "name": "Adv Software Engineering"
+    },
+    {
+        "number": "CS 6310",
+        "name": "Software Arch & Design"
+    },
+    {
+        "number": "CS 6320",
+        "name": "Requirements Analysis"
+    },
+    {
+        "number": "CS 6330",
+        "name": "Software Generation&Test"
+    },
+    {
+        "number": "CS 6340",
+        "name": "Software Analysis & Test"
+    },
+    {
+        "number": "CS 6365",
+        "name": "Intro Enterprise Comput."
+    },
+    {
+        "number": "CS 6390",
+        "name": "Programming Languages"
+    },
+    {
+        "number": "CS 6400",
+        "name": "DB Sys Concepts& Design"
+    },
+    {
+        "number": "CS 6402",
+        "name": "Databases and Infosec"
+    },
+    {
+        "number": "CS 6411",
+        "name": "O-O Database Model & Sys"
+    },
+    {
+        "number": "CS 6421",
+        "name": "Tempor,Spatial&Active DB"
+    },
+    {
+        "number": "CS 6422",
+        "name": "Database System Implemnt"
+    },
+    {
+        "number": "CS 6423",
+        "name": "Adv Database Systems"
+    },
+    {
+        "number": "CS 6430",
+        "name": "Parallel&Distributed DB"
+    },
+    {
+        "number": "CS 6440",
+        "name": "Intro Health Informatics"
+    },
+    {
+        "number": "CS 6451",
+        "name": "Human-Centered Computing"
+    },
+    {
+        "number": "CS 6452",
+        "name": "Prototyping Interact Sys"
+    },
+    {
+        "number": "CS 6454",
+        "name": "Qualitative Methods HCI"
+    },
+    {
+        "number": "CS 6455",
+        "name": "User Interface Dsgn&Eval"
+    },
+    {
+        "number": "CS 6456",
+        "name": "Principles-UI Software"
+    },
+    {
+        "number": "CS 6457",
+        "name": "Video Game Design"
+    },
+    {
+        "number": "CS 6460",
+        "name": "Educ Tech-Foundations"
+    },
+    {
+        "number": "CS 6461",
+        "name": "Computing Ed Research"
+    },
+    {
+        "number": "CS 6465",
+        "name": "Computational Journalism"
+    },
+    {
+        "number": "CS 6470",
+        "name": "Online Communities"
+    },
+    {
+        "number": "CS 6471",
+        "name": "Comp Social Science"
+    },
+    {
+        "number": "CS 6474",
+        "name": "Social Computing"
+    },
+    {
+        "number": "CS 6475",
+        "name": "Comp. Photography"
+    },
+    {
+        "number": "CS 6476",
+        "name": "Computer Vision"
+    },
+    {
+        "number": "CS 6480",
+        "name": "Comp Visualiz Techniques"
+    },
+    {
+        "number": "CS 6485",
+        "name": "Visual Meth-Sci & Engr"
+    },
+    {
+        "number": "CS 6491",
+        "name": "Computer Graphics"
+    },
+    {
+        "number": "CS 6492",
+        "name": "Shape Grammars"
+    },
+    {
+        "number": "CS 6497",
+        "name": "Comp Aesthetics"
+    },
+    {
+        "number": "CS 6505",
+        "name": "Computability&Algorithms"
+    },
+    {
+        "number": "CS 6515",
+        "name": "Intro to Grad Algorithms"
+    },
+    {
+        "number": "CS 6520",
+        "name": "Computational Complexity"
+    },
+    {
+        "number": "CS 6550",
+        "name": "Design& Analy-Algorithms"
+    },
+    {
+        "number": "CS 6601",
+        "name": "Artificial Intelligence"
+    },
+    {
+        "number": "CS 6603",
+        "name": "AI Ethics Society"
+    },
+    {
+        "number": "CS 6641",
+        "name": "Personal Health Inform"
+    },
+    {
+        "number": "CS 6670",
+        "name": "Distrib Cntrl Algorithms"
+    },
+    {
+        "number": "CS 6675",
+        "name": "Advance Internet Comput"
+    },
+    {
+        "number": "CS 6705",
+        "name": "Applications of AI"
+    },
+    {
+        "number": "CS 6725",
+        "name": "Info Security Policies"
+    },
+    {
+        "number": "CS 6726",
+        "name": "Privacy Tech Policy Law"
+    },
+    {
+        "number": "CS 6727",
+        "name": "Cyber Sec Practicum"
+    },
+    {
+        "number": "CS 6730",
+        "name": "Data Vis Principles"
+    },
+    {
+        "number": "CS 6745",
+        "name": "Info&Com Tech&Global Dev"
+    },
+    {
+        "number": "CS 6747",
+        "name": "ADV Malware Analysis"
+    },
+    {
+        "number": "CS 6750",
+        "name": "Human-Computer Interact"
+    },
+    {
+        "number": "CS 6753",
+        "name": "HCI Prof Prep & Practice"
+    },
+    {
+        "number": "CS 6754",
+        "name": "Engr Database Mgt System"
+    },
+    {
+        "number": "CS 6755",
+        "name": "HCI Foundations"
+    },
+    {
+        "number": "CS 6763",
+        "name": "Design of Environments"
+    },
+    {
+        "number": "CS 6764",
+        "name": "Geometric Modeling"
+    },
+    {
+        "number": "CS 6770",
+        "name": "Mixed Reality Design"
+    },
+    {
+        "number": "CS 6780",
+        "name": "Medical Image Processing"
+    },
+    {
+        "number": "CS 6795",
+        "name": "Intro-Cognitive Science"
+    },
+    {
+        "number": "CS 6998",
+        "name": "HCI Master's Project"
+    },
+    {
+        "number": "CS 6999",
+        "name": "Master's Project"
+    },
+    {
+        "number": "CS 6XXX",
+        "name": "Computer Sci Elective"
+    },
+    {
+        "number": "CS 7000",
+        "name": "Master's Thesis"
+    },
+    {
+        "number": "CS 7001",
+        "name": "Grad Studies-Computing"
+    },
+    {
+        "number": "CS 7110",
+        "name": "Parallel Computer Arch"
+    },
+    {
+        "number": "CS 7210",
+        "name": "Distributed Computing"
+    },
+    {
+        "number": "CS 7230",
+        "name": "Software Dsgn,Impl& Eval"
+    },
+    {
+        "number": "CS 7250",
+        "name": "Broadband Networking Sys"
+    },
+    {
+        "number": "CS 7260",
+        "name": "Internet Arch& Protocols"
+    },
+    {
+        "number": "CS 7270",
+        "name": "Networked Apps&Services"
+    },
+    {
+        "number": "CS 7280",
+        "name": "Network Science"
+    },
+    {
+        "number": "CS 7290",
+        "name": "Adv. Microarchitecture"
+    },
+    {
+        "number": "CS 7292",
+        "name": "Reliable Secure Comparch"
+    },
+    {
+        "number": "CS 7400",
+        "name": "Intro Quantum Computing"
+    },
+    {
+        "number": "CS 7450",
+        "name": "Inform Visualization"
+    },
+    {
+        "number": "CS 7451",
+        "name": "Hum- Center Data Analysis"
+    },
+    {
+        "number": "CS 7455",
+        "name": "Issues/Human-Center Comp"
+    },
+    {
+        "number": "CS 7460",
+        "name": "Collaborative Computing"
+    },
+    {
+        "number": "CS 7465",
+        "name": "Edu Tech-Design and Eval"
+    },
+    {
+        "number": "CS 7467",
+        "name": "Comp Collaborative Learn"
+    },
+    {
+        "number": "CS 7470",
+        "name": "Ubiquitous Computing"
+    },
+    {
+        "number": "CS 7476",
+        "name": "Advanced Computer Vision"
+    },
+    {
+        "number": "CS 7490",
+        "name": "Adv Image Synthesis"
+    },
+    {
+        "number": "CS 7491",
+        "name": "3D Complexity"
+    },
+    {
+        "number": "CS 7492",
+        "name": "Simulation of Biology"
+    },
+    {
+        "number": "CS 7495",
+        "name": "Computer Vision"
+    },
+    {
+        "number": "CS 7496",
+        "name": "Computer Animation"
+    },
+    {
+        "number": "CS 7497",
+        "name": "Virtual Environments"
+    },
+    {
+        "number": "CS 7499",
+        "name": "3D Reconstruction"
+    },
+    {
+        "number": "CS 7510",
+        "name": "Graph Algorithm"
+    },
+    {
+        "number": "CS 7520",
+        "name": "Approximation Algorithms"
+    },
+    {
+        "number": "CS 7525",
+        "name": "Algorithmic Game Theory"
+    },
+    {
+        "number": "CS 7530",
+        "name": "Randomized Algorithms"
+    },
+    {
+        "number": "CS 7535",
+        "name": "Markov Chain Monte Carlo"
+    },
+    {
+        "number": "CS 7540",
+        "name": "Spectral Algorithms"
+    },
+    {
+        "number": "CS 7545",
+        "name": "Machine Learning Theory"
+    },
+    {
+        "number": "CS 7560",
+        "name": "Theory of Cryptography"
+    },
+    {
+        "number": "CS 7610",
+        "name": "Modeling and Design"
+    },
+    {
+        "number": "CS 7611",
+        "name": "AI Problem Solving"
+    },
+    {
+        "number": "CS 7612",
+        "name": "AI Planning"
+    },
+    {
+        "number": "CS 7613",
+        "name": "Knowledge Systems Engr"
+    },
+    {
+        "number": "CS 7615",
+        "name": "Knowledge Agents"
+    },
+    {
+        "number": "CS 7616",
+        "name": "Pattern Recognition"
+    },
+    {
+        "number": "CS 7620",
+        "name": "Case-Based Reasoning"
+    },
+    {
+        "number": "CS 7626",
+        "name": "Behavioral Imaging"
+    },
+    {
+        "number": "CS 7630",
+        "name": "Autonomous Robotics"
+    },
+    {
+        "number": "CS 7631",
+        "name": "Multi-Robot Systems"
+    },
+    {
+        "number": "CS 7632",
+        "name": "Game AI"
+    },
+    {
+        "number": "CS 7633",
+        "name": "Human-Robot Interaction"
+    },
+    {
+        "number": "CS 7634",
+        "name": "AI Storytell In Vir Wrld"
+    },
+    {
+        "number": "CS 7636",
+        "name": "Computational Perception"
+    },
+    {
+        "number": "CS 7637",
+        "name": "Knowledge-Based AI"
+    },
+    {
+        "number": "CS 7638",
+        "name": "Robotics: AI Techniques"
+    },
+    {
+        "number": "CS 7639",
+        "name": "Cyber Physical Design"
+    },
+    {
+        "number": "CS 7640",
+        "name": "Learning in Auton Agents"
+    },
+    {
+        "number": "CS 7641",
+        "name": "Machine Learning"
+    },
+    {
+        "number": "CS 7642",
+        "name": "Reinforcement Learning"
+    },
+    {
+        "number": "CS 7643",
+        "name": "Deep Learning"
+    },
+    {
+        "number": "CS 7644",
+        "name": "ML For Robotics"
+    },
+    {
+        "number": "CS 7645",
+        "name": "Num Machine Learning"
+    },
+    {
+        "number": "CS 7646",
+        "name": "Mach Learn For Trading"
+    },
+    {
+        "number": "CS 7647",
+        "name": "Mach Lrn w/ltd Supervis"
+    },
+    {
+        "number": "CS 7648",
+        "name": "Interactive Robo Learn"
+    },
+    {
+        "number": "CS 7649",
+        "name": "Robot Intelli: Planning"
+    },
+    {
+        "number": "CS 7650",
+        "name": "Natural Language"
+    },
+    {
+        "number": "CS 7651",
+        "name": "Human & Machine Learning"
+    },
+    {
+        "number": "CS 7695",
+        "name": "Phil of Cognition"
+    },
+    {
+        "number": "CS 7697",
+        "name": "Cognitive Model Sci&Tech"
+    },
+    {
+        "number": "CS 7741",
+        "name": "Robotics Pro Prep 1"
+    },
+    {
+        "number": "CS 7742",
+        "name": "Robo Pro Prep 2"
+    },
+    {
+        "number": "CS 7743",
+        "name": "Robo Pro Prep 3"
+    },
+    {
+        "number": "CS 7750",
+        "name": "Math Fnd Of Machine Lrn"
+    },
+    {
+        "number": "CS 7751",
+        "name": "Graphical Models in ML"
+    },
+    {
+        "number": "CS 7785",
+        "name": "Intro Robotics Research"
+    },
+    {
+        "number": "CS 7790",
+        "name": "Cognitive Modeling"
+    },
+    {
+        "number": "CS 7999",
+        "name": "Prep-Doctoral Qual Exams"
+    },
+    {
+        "number": "CS 8001",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8002",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8003",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8004",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8005",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8006",
+        "name": "Seminar"
+    },
+    {
+        "number": "CS 8030",
+        "name": "Software Engr Seminar"
+    },
+    {
+        "number": "CS 8740",
+        "name": "Robotics Internship"
+    },
+    {
+        "number": "CS 8741",
+        "name": "Robo Capstone Project"
+    },
+    {
+        "number": "CS 8750",
+        "name": "Robotics Research Fnd I"
+    },
+    {
+        "number": "CS 8751",
+        "name": "Robotics Research Fnd II"
+    },
+    {
+        "number": "CS 8795",
+        "name": "Colloquium-Cognitive Sci"
+    },
+    {
+        "number": "CS 8801",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8802",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8803",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8804",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8805",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8806",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8811",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8813",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8816",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8873",
+        "name": "Special Topics"
+    },
+    {
+        "number": "CS 8893",
+        "name": "Spec Top-Cognitive Sci"
+    },
+    {
+        "number": "CS 8901",
+        "name": "Special Problems"
+    },
+    {
+        "number": "CS 8902",
+        "name": "Special Problems"
+    },
+    {
+        "number": "CS 8903",
+        "name": "Special Problems"
+    },
+    {
+        "number": "CS 8997",
+        "name": "Teaching Assistantship"
+    },
+    {
+        "number": "CS 8998",
+        "name": "Research Assistantship"
+    },
+    {
+        "number": "CS 8999",
+        "name": "Doctoral Thesis Prep"
+    },
+    {
+        "number": "CS 9000",
+        "name": "Doctoral Thesis"
+    }
+]
