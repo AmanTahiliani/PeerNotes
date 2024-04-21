@@ -41,7 +41,7 @@ def request_file():
     }
 
     response = requests.get(url, params=params)
-    file_path = './uploads/' + file_id + '_' + filename
+    file_path = './uploads/' + str(file_id) + '_' + filename
 
     if response.status_code == 200:
         if os.path.exists(file_path):
