@@ -1,12 +1,18 @@
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    border: 3px solid #f1f1f1;
-    border-radius: 5px;
-    color: black;
-    background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin: 0;
+  width: 100%;
+  background-color: #145DA0;
+  border: none;
+  border-radius: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 .App {
     display: flex;
