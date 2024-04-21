@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MainScreenWrapper.css';
+import { getSessionCookie } from '../contexts/session';
+import { Professor, Course, Topic } from "../types/types";
 
 interface Filters {
   professor: string;
@@ -14,9 +16,9 @@ const MainSearch: React.FC = () => {
     course: '',
     topic: '',
   });
-  const [professors, setProfessors] = useState<string[]>([]);
-  const [courses, setCourses] = useState<string[]>([]);
-  const [topics, setTopics] = useState<string[]>([]);
+  const [professors, setProfessors] = useState<Professor[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [topics, setTopics] = useState<Topic[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +31,8 @@ const MainSearch: React.FC = () => {
   }, []);
 
   const getAuthHeaders = () => {
-    const token = localStorage.getItem('authToken');
+    const token = getSessionCookie();
+    // const token = localStorage.getItem('authToken');
     console.log("Using token for API call:", token);
     return {
       'Authorization': `Token ${token}`,
@@ -41,12 +44,13 @@ const MainSearch: React.FC = () => {
     try {
       const response = await fetch('http://localhost:8000/api/professors', {
         method: 'GET',
-        //credentials: 'include',
         headers: getAuthHeaders(),
       });
       const data = await response.json();
-      //setProfessors(data);
+      console.log("Professors fetched:", data);
+
       if (Array.isArray(data)) {
+        console.log("Professors fetched:", data);
         setProfessors(data);
       } else {
         console.error('Data fetched is not an array:', data);
@@ -60,11 +64,9 @@ const MainSearch: React.FC = () => {
     try {
       const response = await fetch('http://localhost:8000/api/courses', {
         method: 'GET',
-        //credentials: 'include',
         headers: getAuthHeaders(),
       });
       const data = await response.json();
-      //setCourses(data);
       if (Array.isArray(data)) {
         setCourses(data);
       } else {
@@ -79,7 +81,6 @@ const MainSearch: React.FC = () => {
     try {
       const response = await fetch('http://localhost:8000/api/topics', {
         method: 'GET',
-        //credentials: 'include',
         headers: getAuthHeaders(),
       });
       const data = await response.json();
@@ -88,7 +89,6 @@ const MainSearch: React.FC = () => {
       } else {
         console.error('Data fetched is not an array:', data);
       }
-      //setTopics(data);
     } catch (error) {
       console.error('Error fetching topics:', error);
     }

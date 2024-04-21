@@ -32,11 +32,15 @@ export default function App() {
 }
 function Navbar() {
   const session = useContext(SessionContext);
+  const logout = () => {
+    destroySessionCookie();
+    window.location.reload();
+  }
 
   const links = session ? (
     <>
       <Link to="/">Home</Link>
-      <Link to="/login" onClick={destroySessionCookie}>Logout</Link>
+      <a onClick={logout}>Logout</a>
     </>
   ): (
       <Link to="/login">Login</Link>
