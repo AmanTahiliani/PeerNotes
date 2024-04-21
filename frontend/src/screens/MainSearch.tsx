@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/MainScreenWrapper.css';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
-import { Professor, Course, Topic } from "../types/types";
+import { Professor, Course, Topic, Semester } from "../types/types";
 
 interface Filters extends Record<string, string> {
   professor: string;
@@ -19,6 +19,7 @@ const MainSearch: React.FC = () => {
   const [professors, setProfessors] = useState<Professor[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [topics, setTopics] = useState<Topic[]>([]);
+  const [semesters, setSemesters] = useState<Semester[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +29,8 @@ const MainSearch: React.FC = () => {
     fetchCourses();
     // Fetch topics
     fetchTopics();
+    // Fetch semesters
+    fetchSemesters();
   }, []);
 
 
@@ -82,6 +85,22 @@ const MainSearch: React.FC = () => {
       console.error('Error fetching topics:', error);
     }
   };
+  const fetchSemesters = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/semesters', {
+        method: 'GET',
+        headers: getAuthHeaders(),
+      });
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setSemesters(data);
+      } else {
+        console.error('Data fetched is not an array:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+    }
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -125,6 +144,15 @@ const MainSearch: React.FC = () => {
             <option value="">Select a Topic</option>
             {topics.map((topic) => (
               <option key={topic.id} value={topic.id}>{topic.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="filter-item">
+          <label htmlFor="semesters">Semester:</label>
+          <select id="semester" name="semester" value={filters.semester} onChange={handleChange}>
+            <option value="">Select a Semester</option>
+            {semesters.map((semester) => (
+              <option key={semester.id} value={semester.id}>{semester.name}</option>
             ))}
           </select>
         </div>

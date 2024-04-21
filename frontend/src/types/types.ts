@@ -37,3 +37,11 @@ export interface File {
   upvotes: number[];
   downvotes: number[];
 }
+
+enum Status {
+  HOSTED = "HOSTED",
+  PRIVATE = 'PRIVATE',
+}
+export interface RegisteredFile extends File {
+  status: Status;
+}

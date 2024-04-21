@@ -23,7 +23,7 @@ export default function App() {
     <>
       <SessionContext.Provider value={session}>
           <Navbar />
-          <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
+          <div className="App">
             <Outlet />
           </div>
         </SessionContext.Provider>
@@ -49,7 +49,7 @@ function Navbar() {
     <>
       <div>
         <img src="/PeerNotes.png" alt="PeerNotes Logo" style={{ height: '60px' }} />
-        <Link to="/" style={linkStyle}>Home</Link>
+        <Link to="/register" style={linkStyle}>Upload</Link>
         <Link to="/search" style={linkStyle}>Search</Link>
       </div>
       <div>

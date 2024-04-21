@@ -49,17 +49,34 @@ const Results: React.FC = () => {
         {isLoading ? (
           <p>Loading...</p>
         ) : files.length ? (
-            files.map((file) => (
-            <div key={file.id} className={styles.fileCard}>
-              <h3>{file.filename}</h3>
-              <p>Course: {file.course.name} {file.course.number}</p>
-              <p>Professor: {file.professor.name}</p>
-              <p>Semester: {file.semester.name}</p>
-              <p>Upvotes: {file.upvotes.length}</p>
-              <p>Downvotes: {file.downvotes.length}</p>
-              <p><a href="">Download</a></p>
-            </div>
-          ))
+            <table>
+              <thead>
+                <tr>
+                  <th>Filename</th>
+                  <th>Course</th>
+                  <th>Professor</th>
+                  <th>Semester</th>
+                  <th>Upvotes</th>
+                  <th>Downvotes</th>
+                  <th>Original Author</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                {files.map((file) => (
+                  <tr key={file.id}>
+                    <td>{file.filename}</td>
+                    <td>{file.course.name} {file.course.number}</td>
+                    <td>{file.professor.name}</td>
+                    <td>{file.semester.name}</td>
+                    <td>{file.upvotes.length}</td>
+                    <td>{file.downvotes.length}</td>
+                    <td>{file.original_author.username}</td>
+                    <td><a href="">Download</a></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
         ) : (
           <p>No results found.</p>
         )}

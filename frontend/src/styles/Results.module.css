@@ -71,3 +71,18 @@
   .searchAgainButton:hover {
     background-color: #B1D4E0; /* lighter shade for hover effect */
   }
+
+  table {
+    width: 100%;
+  }
+  th {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #FFFFFF;
+  }
+  td {
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    background-color: #B1D4E0;
+    color: black;
+  }
