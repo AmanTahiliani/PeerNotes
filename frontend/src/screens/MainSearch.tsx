@@ -4,7 +4,7 @@ import '../styles/MainScreenWrapper.css';
 import { getSessionCookie } from '../contexts/session';
 import { Professor, Course, Topic } from "../types/types";
 
-interface Filters {
+interface Filters extends Record<string, string> {
   professor: string;
   course: string;
   topic: string;
@@ -104,7 +104,7 @@ const MainSearch: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const searchParams = new URLSearchParams(filters as any);
+    const searchParams = new URLSearchParams(filters);
     navigate(`/results?${searchParams}`);
   };
 
