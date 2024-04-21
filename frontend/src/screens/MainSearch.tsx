@@ -38,10 +38,8 @@ const MainSearch: React.FC = () => {
         headers: getAuthHeaders(),
       });
       const data = await response.json();
-      console.log("Professors fetched:", data);
 
       if (Array.isArray(data)) {
-        console.log("Professors fetched:", data);
         setProfessors(data);
       } else {
         console.error('Data fetched is not an array:', data);
