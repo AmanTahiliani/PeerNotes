@@ -43,6 +43,7 @@ class FileSerializer(serializers.ModelSerializer):
     topic = TopicSerializer()
     professor = ProfessorSerializer()
     semester = SemesterSerializer()
+    course = CourseSerializer()
 
     class Meta:
         model = File
