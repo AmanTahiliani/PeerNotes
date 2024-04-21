@@ -23,7 +23,7 @@ export default function App() {
     <>
       <SessionContext.Provider value={session}>
           <Navbar />
-          <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90vh' , gap: 15}}>
+          <div className="App">
             <Outlet />
           </div>
         </SessionContext.Provider>
@@ -37,7 +37,7 @@ function Navbar() {
     background: '#B1D4E0', 
     padding: '8px 16px', 
     borderRadius: '5px',
-    margin: '0 5px' 
+    // margin: '0 5px' 
   };
   const session = useContext(SessionContext);
   const logout = () => {
@@ -47,10 +47,14 @@ function Navbar() {
 
   const links = session ? (
     <>
-      <img src="/PeerNotes.png" alt="PeerNotes Logo" style={{ height: '60px', marginRight: '10px' }} />
-      <Link to="/" style={linkStyle}>Home</Link>
-      <Link to="/search" style={linkStyle}>Search</Link>
-      <a onClick={logout} style={linkStyle}>Logout</a>
+      <div>
+        <img src="/PeerNotes.png" alt="PeerNotes Logo" style={{ height: '60px' }} />
+        <Link to="/register" style={linkStyle}>Upload</Link>
+        <Link to="/search" style={linkStyle}>Search</Link>
+      </div>
+      <div>
+        <a onClick={logout} style={linkStyle}>Logout</a>
+      </div>
     </>
   ): (
       <Link to="/login">Login</Link>

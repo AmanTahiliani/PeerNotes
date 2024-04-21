@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../styles/Results.module.css'; // Make sure this path is correct
-
-interface File {
-  id: string;
-  name: string; // do we even use id and name?
-  professor: string;
-  course: string;
-  type?: string; // Assumed type is optional
-  // what other properties to add?semester?
-}
+import { getAuthHeaders } from '../utils/getAuthHeaders';
+import { File } from '../types/types';
 
 const Results: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -23,7 +16,8 @@ const Results: React.FC = () => {
       try {
         // Need to double check this
         const queryString = location.search; // Includes the '?' prefix
-        const response = await fetch(`/api/path-to-filefilterview${queryString}`);
+        console.log(queryString)
+        const response = await fetch(`http://localhost:8000/api/files/filter${queryString}`, {headers: getAuthHeaders()});
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -55,9 +49,34 @@ const Results: React.FC = () => {
         {isLoading ? (
           <p>Loading...</p>
         ) : files.length ? (
-          <table className={styles.resultsTable}>
-            {/* Table structure here */}
-          </table>
+            <table>
+              <thead>
+                <tr>
+                  <th>Filename</th>
+                  <th>Course</th>
+                  <th>Professor</th>
+                  <th>Semester</th>
+                  <th>Upvotes</th>
+                  <th>Downvotes</th>
+                  <th>Original Author</th>
+                  <th>Download</th>
+                </tr>
+              </thead>
+              <tbody>
+                {files.map((file) => (
+                  <tr key={file.id}>
+                    <td>{file.filename}</td>
+                    <td>{file.course.name} {file.course.number}</td>
+                    <td>{file.professor.name}</td>
+                    <td>{file.semester.name}</td>
+                    <td>{file.upvotes.length}</td>
+                    <td>{file.downvotes.length}</td>
+                    <td>{file.original_author.username}</td>
+                    <td><a href="">Download</a></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
         ) : (
           <p>No results found.</p>
         )}

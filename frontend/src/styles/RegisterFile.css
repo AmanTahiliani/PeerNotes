@@ -1,0 +1,48 @@
+h1 {
+color: white;
+}
+.container {
+    display: flex;
+    gap: 10rem;
+    justify-content: space-between;
+}
+
+.file-upload-card {
+    padding: 1em;
+    background-color: #B1D4E0;
+    border-radius: 5px;
+}
+.file-upload-card h1 {
+    color: black;
+}
+
+.file-card {
+    padding: 1em;
+    background-color: #2E8BC0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+ .submit-button {
+    padding: 8px 16px;
+    margin-top: 20px; /* Adds space above the button */
+    background-color: #2E8BC0; /* Example background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  }
+
+  th {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #FFFFFF;
+    color: white;
+  }
+  td {
+    text-align: center;
+    border: 1px solid #FFFFFF;
+    background-color: #B1D4E0;
+    color: black;
+  }

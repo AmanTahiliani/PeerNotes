@@ -10,6 +10,7 @@ import Login from './screens/Login.tsx';
 import Signup from './screens/Signup.tsx';
 import Results from './screens/Results.tsx';
 import MainSearch from './screens/MainSearch.tsx';
+import RegisterFile from './screens/RegisterFile.tsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "results",
         element: <Results/>,
+      },
+      {
+        path: "register",
+        element: <RegisterFile />,
       },
     ]
   },
