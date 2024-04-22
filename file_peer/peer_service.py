@@ -1,9 +1,28 @@
 from flask import Flask, send_file, request
 import requests
 import socket
+import shutil
 import os
 
 app = Flask(__name__)
+
+
+@app.route('/copy-file', methods = ['POST'])
+def copy_file():
+    try:
+        data = request.json
+        source_file = data['file_path']
+        id = data['file_id']
+        if not os.path.exists(source_file):
+            return f"Source file does not exist at {source_file}", 400
+        filename = os.path.basename(source_file)
+        destination_path = os.path.join('./uploads/', str(id) +'_' +  filename)
+        shutil.copyfile(source_file, destination_path)
+        return "File Moved successfully", 200
+    except Exception as e:
+        print(f'An error occured: {e}')
+        return "An error occured", 400
+
 
 @app.route('/ip', methods=["GET"])
 def get_internal_ip():
