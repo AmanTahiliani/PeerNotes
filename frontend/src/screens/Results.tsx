@@ -72,7 +72,7 @@ const Results: React.FC = () => {
                     <td>{file.upvotes.length}</td>
                     <td>{file.downvotes.length}</td>
                     <td>{file.original_author.username}</td>
-                    <td><a href="">Download</a></td>
+                    <td><DownloadButton file={file} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -86,3 +86,36 @@ const Results: React.FC = () => {
 };
 
 export default Results;
+
+
+function DownloadButton({ file }: { file: File }) {
+  const [success, setSuccess] = useState(false);
+  const handleDownload = () => {
+    // Implement download functionality
+    fetch("http://localhost:8080/request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: file.id, filename: file.filename, ip: file.original_author.ip_address }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success download response data:", data);
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setSuccess(false);
+      });
+  };
+  return (
+  <>
+    {
+      success === true ? 
+      <p>Downloaded!</p> : 
+      <button onClick={handleDownload}>Download</button>
+    }
+      </>
+  );
+}

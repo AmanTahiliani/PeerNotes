@@ -54,7 +54,7 @@ def send():
     )
 
 
-@app.route("/request", methods=["GET"])
+@app.route("/request", methods=["POST"])
 def request_file():
     data = request.json
     file_id = data["id"]
@@ -64,7 +64,7 @@ def request_file():
     url = f"http://{ip}:8080/send"
     params = {
         "id": file_id,
-        "filename": filename,
+        "filename": filename.replace(" ", "_"),
     }
 
     response = requests.get(url, params=params)

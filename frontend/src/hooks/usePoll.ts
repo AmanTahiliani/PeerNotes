@@ -7,7 +7,7 @@ export const usePoll = () => {
         .catch((error) => {
           console.error('Error:', error);
         });
-      }, 30 * 60000) // poll every 30 minutes
+      }, 30 * 60000) // poll every 30 minutes  
       return () => {
         // clean up
         clearInterval(interval);
@@ -16,7 +16,7 @@ export const usePoll = () => {
 
     const pollServer = async () => {
         // request private ip from local api
-      return fetch('http://127.0.0.1:8080/ip')
+      return fetch('http://localhost:8080/ip')
         .then(response => response.text())
         .then((data) => {
           // send private ip to central server
