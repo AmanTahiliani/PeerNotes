@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/MainScreenWrapper.css';
 import { getAuthHeaders } from '../utils/getAuthHeaders';
 import { Professor, Course, Topic, Semester } from "../types/types";
+import { getSessionCookie } from '../contexts/session';
 
 interface Filters extends Record<string, string> {
   professor: string;
@@ -23,6 +24,9 @@ const MainSearch: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!getSessionCookie()) {
+      return;
+    }
     // Fetch professors
     fetchProfessors();
     // Fetch courses
