@@ -35,7 +35,7 @@ export default function RegisterFile() {
     fetch(`http://localhost:8000/api/files/filter?peer_id=1`, {
       method: 'GET',
       headers: getAuthHeaders()
-    }) // replace with local api endpoint
+    })
     .then(response => response.json())
     .then(data => {
       setServerFiles(data)
@@ -46,10 +46,37 @@ export default function RegisterFile() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // handle file upload
+    const fileInput = document.getElementById('file');
+    // @ts-expect-error - fileInput is an HTMLInputElement
+    const filename: string = fileInput.files[0].name.replace(/\s/g, "_");
     const formData = new FormData(event.target as HTMLFormElement);
-    const file = formData.get('file');
-    console.log(file, typeof file)
-
+    // register file with central server
+    fetch(`http://localhost:8000/api/register/`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        filename: filename,
+        topic: 1,
+        semester: 1,
+        professor: 1,
+        course: 1,
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        formData.append("file_id", data.id)
+        // send file to local
+        return fetch("http://localhost:8080/copy-file", {
+          method: 'POST',
+          body: formData
+        })
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch(error => console.error(error));
   }
     return (
         <div className="container">

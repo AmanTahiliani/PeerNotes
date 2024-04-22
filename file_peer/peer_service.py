@@ -15,14 +15,24 @@ CORS(app)
 @app.route("/copy-file", methods=["POST"])
 def copy_file():
     try:
-        data = request.json
-        source_file = data["file_path"]
-        id = data["file_id"]
-        if not os.path.exists(source_file):
-            return f"Source file does not exist at {source_file}", 400
-        filename = os.path.basename(source_file)
+        files = request.files
+        id = request.form["file_id"]
+        print(id)
+        if "file" not in files:
+            return "File must be sent in request", 400
+        file = request.files['file']
+        filename = file.filename.replace(" ", "_")
+        # id = data["file_id"]
+        # if not os.path.exists(source_file):
+        #     return f"Source file does not exist at {source_file}", 400
+        # filename = os.path.basename(source_file)
         destination_path = os.path.join("./uploads/", str(id) + "_" + filename)
-        shutil.copyfile(source_file, destination_path)
+        # shutil.copyfile(source_file, destination_path)
+        if os.path.exists(destination_path):
+            return "File with name already exists", 200
+
+        with open(destination_path, "wb") as f:
+            f.write(file.read())
         return "File Moved successfully", 200
     except Exception as e:
         print(f"An error occured: {e}")
@@ -88,7 +98,7 @@ def list_files():
     files = os.listdir("./uploads")
     newFiles = []
     for file in files:
-        newFiles.append(file.split("_")[1])
+        newFiles.append("_".join(file.split("_", 1)[1:]))
     return {"files": newFiles}, 200
 
 @app.route("/request-tests", methods=["GET"])

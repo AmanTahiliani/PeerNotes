@@ -298,10 +298,11 @@ class FileFilterView(APIView):
             if peer_id:
                 queryset = queryset.filter(peer_users__in=peer_id)
             else:
-                active_peer_ids = PeerUser.objects.filter(
-                    last_poll__gte=timezone.now() - timedelta(hours=1)
-                ).values_list("id", flat=True)
-                queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
+                # active_peer_ids = PeerUser.objects.filter(
+                #     last_poll__gte=timezone.now() - timedelta(hours=1)
+                # ).values_list("id", flat=True)
+                # queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
+                pass
 
             serializer = FileSerializer(queryset, many=True)
             # Loop through each serialized file to sort its peer_users
