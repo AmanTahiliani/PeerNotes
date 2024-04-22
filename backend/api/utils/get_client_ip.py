@@ -13,7 +13,13 @@ def get_client_ip(request):
 
 def update_user_ip(request):
     user = request.user
-    ip_address = get_client_ip(request)
+    try:
+        data = request.data
+        ip_address = data['ip']
+        print("Local IP found in request")
+    except Exception as e:
+        ip_address = get_client_ip(request)
+        print("Using public IP")
     user.ip_address = ip_address
     user.last_poll = timezone.now()
     user.save()
