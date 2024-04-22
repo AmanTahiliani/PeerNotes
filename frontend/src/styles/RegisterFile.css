@@ -3,8 +3,8 @@ color: white;
 }
 .container {
     display: flex;
-    gap: 10rem;
-    justify-content: space-between;
+    gap: 5rem;
+    justify-content: center;
 }
 
 .file-upload-card {
