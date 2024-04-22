@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../styles/Results.module.css'; // Make sure this path is correct
 import { getAuthHeaders } from '../utils/getAuthHeaders';
 import { File } from '../types/types';
+import { Link } from 'react-router-dom';
 
 const Results: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -72,7 +73,7 @@ const Results: React.FC = () => {
                     <td>{file.upvotes.length}</td>
                     <td>{file.downvotes.length}</td>
                     <td>{file.original_author.username}</td>
-                    <td><a href="">Download</a></td>
+                    <td><DownloadButton file={file} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -86,3 +87,36 @@ const Results: React.FC = () => {
 };
 
 export default Results;
+
+
+function DownloadButton({ file }: { file: File }) {
+  const [success, setSuccess] = useState(false);
+  const handleDownload = () => {
+    // Implement download functionality
+    fetch("http://localhost:8080/request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: file.id, filename: file.filename, ip: file.original_author.ip_address }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success download response data:", data);
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setSuccess(false);
+      });
+  };
+  return (
+  <>
+    {
+      success === true ? 
+      <Link to="/register">Downloaded!</Link> : 
+      <button onClick={handleDownload}>Download</button>
+    }
+      </>
+  );
+}

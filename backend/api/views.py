@@ -282,6 +282,7 @@ class FileFilterView(APIView):
                 queryset = queryset.filter(course__id=course_id)
             if semester_id:
                 queryset = queryset.filter(semester__id=semester_id)
+            
 
             queryset = queryset.annotate(
                 upvote_count=Count("upvotes"), downvote_count=Count("downvotes")

@@ -1,29 +1,84 @@
 import "../styles/RegisterFile.css";
-import { RegisteredFile } from "../types/types";
+import { RegisteredFile, Status } from "../types/types";
 import { useState, useEffect } from "react";
+import { getAuthHeaders } from "../utils/getAuthHeaders";
 
 export default function RegisterFile() {
+  const [serverFiles, setServerFiles] = useState<RegisteredFile[]>([]);
   const [registeredFiles, setRegisteredFiles] = useState<RegisteredFile[]>([]);
 
   useEffect(() => {
-    fetchRegisteredFiles();
+    fetchServerFiles();
   }, [])
-  const fetchRegisteredFiles = () => {
-    return
-    fetch("http://localhost:5000/files") // replace with local api endpoint
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/files`, {
+      method: 'GET',
+    })
       .then(response => response.json())
       .then(data => {
-          setRegisteredFiles(data);
+        const files: string[] = data.files.map((file: string) => {
+          return file.replace(/\s/g, "_");
+        })
+        setRegisteredFiles(
+          serverFiles.map((file) => {
+            if (files.includes(file.filename)) {
+              file.status = Status.HOSTED;
+              return file;
+            }
+            file.status = Status.PRIVATE;
+            return file;
+          })
+        )
       })
-      .catch(error => console.error(error));
+  }, [serverFiles])
+
+  const fetchServerFiles = () => {
+    fetch(`http://localhost:8000/api/get-peer-files/`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    })
+    .then(response => response.json())
+      .then(data => {
+      setServerFiles(data)
+    })
+    .catch(error => console.error(error));
   }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // handle file upload
+    const fileInput = document.getElementById('file');
+    // @ts-expect-error - fileInput is an HTMLInputElement
+    const filename: string = fileInput.files[0].name.replace(/\s/g, "_");
     const formData = new FormData(event.target as HTMLFormElement);
-    const file = formData.get('file');
-    console.log(file, typeof file)
-
+    // register file with central server
+    fetch(`http://localhost:8000/api/register/`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        filename: filename,
+        topic: 1,
+        semester: 1,
+        professor: 1,
+        course: 1,
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        formData.append("file_id", data.id)
+        // send file to local
+        return fetch("http://localhost:8080/copy-file", {
+          method: 'POST',
+          body: formData
+        })
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch(error => console.error(error));
   }
     return (
         <div className="container">

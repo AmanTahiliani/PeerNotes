@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Outlet } from "react-router-dom";
 import { SessionContext, destroySessionCookie, getSessionCookie } from "./contexts/session";
 import { useState, useEffect, useContext } from "react";
+import { usePoll } from "./hooks/usePoll";
 
 export default function App() {
   const [session, setSession] = useState(getSessionCookie());
   const navigate = useNavigate();
-
+  usePoll();
   // Redirect to login if session is undefined
   useEffect(
     () => {

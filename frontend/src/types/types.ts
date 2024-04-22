@@ -38,7 +38,7 @@ export interface File {
   downvotes: number[];
 }
 
-enum Status {
+export enum Status {
   HOSTED = "HOSTED",
   PRIVATE = 'PRIVATE',
 }

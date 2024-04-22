@@ -28,7 +28,7 @@ nav div {
     align-items: center;
     justify-content: center; /* If you're centering the content */
     height: 100vh; /* Full height */
-    margin-top: -100px; /* Move up */
+    margin-top: 100px; /* Move up */
     width: 100%;
   }
 
