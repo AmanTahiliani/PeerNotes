@@ -235,6 +235,31 @@ class RegisterFile(APIView):
             )
 
 
+class AddPeerToFile(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, file_id):
+        try:
+            user = request.user
+            file = File.objects.get(id=file_id)
+            print("File fetched")
+            print(file)
+            print(file.peer_users)
+            if not file.peer_users.filter(id=user.id).exists():
+                file.peer_users.add(user)
+                file.save()
+            return Response(
+                f"User added to file with id {file.id}", status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            print(f"Error occured while adding peer to file: {e}")
+            return Response(
+                "Unable to register peer to given file id",
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+
 class FileFilterView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -282,7 +307,6 @@ class FileFilterView(APIView):
                 queryset = queryset.filter(course__id=course_id)
             if semester_id:
                 queryset = queryset.filter(semester__id=semester_id)
-            
 
             queryset = queryset.annotate(
                 upvote_count=Count("upvotes"), downvote_count=Count("downvotes")

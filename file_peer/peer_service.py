@@ -20,7 +20,7 @@ def copy_file():
         print(id)
         if "file" not in files:
             return "File must be sent in request", 400
-        file = request.files['file']
+        file = request.files["file"]
         filename = file.filename.replace(" ", "_")
         # id = data["file_id"]
         # if not os.path.exists(source_file):
@@ -93,6 +93,7 @@ def request_file():
         print("Error:", error)
         return error, response.status_code
 
+
 @app.route("/files", methods=["GET"])
 def list_files():
     files = os.listdir("./uploads")
@@ -100,6 +101,7 @@ def list_files():
     for file in files:
         newFiles.append("_".join(file.split("_", 1)[1:]))
     return {"files": newFiles}, 200
+
 
 @app.route("/request-tests", methods=["GET"])
 def request_test_():
