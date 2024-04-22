@@ -83,6 +83,13 @@ def request_file():
         print("Error:", error)
         return error, response.status_code
 
+@app.route("/files", methods=["GET"])
+def list_files():
+    files = os.listdir("./uploads")
+    newFiles = []
+    for file in files:
+        newFiles.append(file.split("_")[1])
+    return {"files": newFiles}, 200
 
 @app.route("/request-tests", methods=["GET"])
 def request_test_():

@@ -1,22 +1,48 @@
 import "../styles/RegisterFile.css";
-import { RegisteredFile } from "../types/types";
+import { RegisteredFile, Status } from "../types/types";
 import { useState, useEffect } from "react";
+import { getAuthHeaders } from "../utils/getAuthHeaders";
 
 export default function RegisterFile() {
+  const [serverFiles, setServerFiles] = useState<RegisteredFile[]>([]);
   const [registeredFiles, setRegisteredFiles] = useState<RegisteredFile[]>([]);
 
   useEffect(() => {
-    fetchRegisteredFiles();
+    fetchServerFiles();
   }, [])
-  const fetchRegisteredFiles = () => {
-    return
-    fetch("http://localhost:5000/files") // replace with local api endpoint
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/files`, {
+      method: 'GET',
+    })
       .then(response => response.json())
       .then(data => {
-          setRegisteredFiles(data);
+        const files: string[] = data.files
+        setRegisteredFiles(
+          serverFiles.map((file) => {
+            if (files.includes(file.filename)) {
+              file.status = Status.HOSTED;
+              return file;
+            }
+            file.status = Status.PRIVATE;
+            return file;
+          })
+        )
       })
-      .catch(error => console.error(error));
+  }, [serverFiles])
+
+  const fetchServerFiles = () => {
+    fetch(`http://localhost:8000/api/files/filter?peer_id=1`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    }) // replace with local api endpoint
+    .then(response => response.json())
+    .then(data => {
+      setServerFiles(data)
+    })
+    .catch(error => console.error(error));
   }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // handle file upload

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../styles/Results.module.css'; // Make sure this path is correct
 import { getAuthHeaders } from '../utils/getAuthHeaders';
 import { File } from '../types/types';
+import { Link } from 'react-router-dom';
 
 const Results: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -113,7 +114,7 @@ function DownloadButton({ file }: { file: File }) {
   <>
     {
       success === true ? 
-      <p>Downloaded!</p> : 
+      <Link to="/register">Downloaded!</Link> : 
       <button onClick={handleDownload}>Download</button>
     }
       </>
