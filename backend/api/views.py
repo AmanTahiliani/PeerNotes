@@ -113,7 +113,7 @@ class UpvoteFile(APIView):
 
     def post(self, request, file_id):
         user = request.user
-        update_user_ip(request)
+        # update_user_ip(request)
 
         try:
             file = File.objects.get(id=file_id)
@@ -139,7 +139,7 @@ class DownvoteFile(APIView):
 
     def post(self, request, file_id):
         user = request.user
-        update_user_ip(request)
+        # update_user_ip(request)
 
         try:
             file = File.objects.get(id=file_id)
@@ -165,7 +165,7 @@ class RegisterFile(APIView):
 
     def post(self, request):
         user = request.user
-        update_user_ip(request)
+        # update_user_ip(request)
         data = request.data
         try:
             with transaction.atomic():
@@ -242,7 +242,7 @@ class FileFilterView(APIView):
     def get(self, request, format=None):
         try:
             # Extract filters from the query parameters
-            update_user_ip(request)
+            # update_user_ip(request)
             topic_id = request.query_params.get("topic")
             professor_id = request.query_params.get("professor")
             course_id = request.query_params.get("course")
@@ -325,7 +325,7 @@ class ReportUserView(APIView):
 
     def post(self, request):
         data = request.data
-        update_user_ip(request)
+        # update_user_ip(request)
         try:
             assert "file_id" in data
             assert "user_id" in data
