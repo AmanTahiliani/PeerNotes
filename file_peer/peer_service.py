@@ -74,6 +74,37 @@ def request_file():
         error = response.text
         print("Error:", error)
         return error, response.status_code
+    
+@app.route('/request-tests', methods=['GET'])
+def request_tests():
+    data = request.json
+    file_id = data['id']
+    filename = data['filename']
+    ip = data['ip']
+    new_filename = data['new_filename']
+    
+
+    url = f"http://{ip}:8080/send"
+    params = {
+        'id': file_id,
+        'filename': filename,
+    }
+
+    response = requests.get(url, params=params)
+    file_path = './uploads/' + str(file_id) + '_' + new_filename
+
+    if response.status_code == 200:
+        if os.path.exists(file_path):
+            return "File with name already exists", 200
+        
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+        print("File downloaded successfully")
+        return f'File Downloaded to location to location {file_path}', 200
+    else:
+        error = response.text
+        print("Error:", error)
+        return error, response.status_code
 
 
 if __name__ == '__main__':
