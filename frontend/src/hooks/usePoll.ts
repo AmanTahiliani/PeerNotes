@@ -20,7 +20,7 @@ export const usePoll = () => {
         .then(response => response.text())
         .then((data) => {
           // send private ip to central server
-          return fetch('http://localhost:8000/api/poll/', {
+          return fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/poll/`, {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify({ip: data}),

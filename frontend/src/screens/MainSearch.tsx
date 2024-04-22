@@ -39,13 +39,17 @@ const MainSearch: React.FC = () => {
 
 
   const fetchProfessors = async () => {
+    const token = getSessionCookie();
     try {
-      const response = await fetch('http://localhost:8000/api/professors', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/professors/`, {
         method: 'GET',
-        headers: getAuthHeaders(),
+        headers: {
+          'Authorization': `Token ${token}`,
+        },
       });
       const data = await response.json();
-
+      console.log("HEREEEEEE", data);
+      console.log(response)
       if (Array.isArray(data)) {
         setProfessors(data);
       } else {
@@ -58,7 +62,7 @@ const MainSearch: React.FC = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/courses', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/courses`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -75,7 +79,7 @@ const MainSearch: React.FC = () => {
 
   const fetchTopics = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/topics', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/topics`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -91,7 +95,7 @@ const MainSearch: React.FC = () => {
   };
   const fetchSemesters = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/semesters', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/semesters`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
