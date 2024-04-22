@@ -18,7 +18,7 @@ const Results: React.FC = () => {
         // Need to double check this
         const queryString = location.search; // Includes the '?' prefix
         console.log(queryString)
-        const response = await fetch(`http://localhost:8000/api/files/filter${queryString}`, {headers: getAuthHeaders()});
+        const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/files/filter${queryString}`, {headers: getAuthHeaders()});
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -105,8 +105,19 @@ function DownloadButton({ file }: { file: File }) {
       body: JSON.stringify({ id: file.id, filename: file.filename, ip: file.original_author.ip_address }),
     })
       .then((response) => response.text())
-      .then((data) => {
-        console.log("Success download response data:", data);
+      .then(() => {
+        return fetch(
+          `${import.meta.env.VITE_CENTRAL_SERVER}/api/files/${file.id}/add-peer/`,
+          {
+            method: "POST",
+            headers: getAuthHeaders(),
+          }
+        )
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add peer");
+        }
         setSuccess(true);
       })
       .catch((error) => {

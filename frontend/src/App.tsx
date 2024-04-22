@@ -13,7 +13,7 @@ export default function App() {
   useEffect(
     () => {
       setSession(getSessionCookie());
-      if (session === undefined) {
+      if (session === null) {
         navigate("/login");
       }
     },

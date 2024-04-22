@@ -13,7 +13,7 @@ export default function Login() {
     const formData = new FormData(e.target as HTMLFormElement);
     const username = formData.get('username');
     const password = formData.get('password');
-    fetch('http://localhost:8000/api/login/', {
+    fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/login/`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -25,7 +25,7 @@ export default function Login() {
     .then(data => {
       console.log("Login response data:", data);
       if (data.token) {
-        // localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authToken', data.token);
         navigate('/search');
       } else {
           console.error('No token received:', data);

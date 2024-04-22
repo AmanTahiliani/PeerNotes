@@ -35,7 +35,7 @@ export default function RegisterFile() {
   }, [serverFiles])
 
   const fetchServerFiles = () => {
-    fetch(`http://localhost:8000/api/get-peer-files/`, {
+    fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/get-peer-files/`, {
       method: 'GET',
       headers: getAuthHeaders()
     })
@@ -55,7 +55,7 @@ export default function RegisterFile() {
     const formData = new FormData(event.target as HTMLFormElement);
 
     // register file with central server
-    fetch(`http://localhost:8000/api/register/`, {
+    fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/register/`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({
@@ -116,7 +116,7 @@ export default function RegisterFile() {
 
   const fetchProfessors = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/professors', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/professors`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -134,7 +134,7 @@ export default function RegisterFile() {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/courses', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/courses`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -151,7 +151,7 @@ export default function RegisterFile() {
 
   const fetchTopics = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/topics', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/topics`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
@@ -167,7 +167,7 @@ export default function RegisterFile() {
   };
   const fetchSemesters = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/semesters', {
+      const response = await fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/semesters`, {
         method: 'GET',
         headers: getAuthHeaders(),
       });
