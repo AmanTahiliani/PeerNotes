@@ -76,7 +76,7 @@ def request_file():
         return error, response.status_code
     
 @app.route('/request-tests', methods=['GET'])
-def request_tests():
+def request_test_():
     data = request.json
     file_id = data['id']
     filename = data['filename']
