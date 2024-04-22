@@ -12,7 +12,8 @@ export default function Signup() {
         const email = formData.get('email');
         const username = formData.get('username');
         const password = formData.get('password');
-        fetch('http://localhost:8000/api/signup/', {
+        console.log(import.meta.env.VITE_CENTRAL_SERVER)
+        fetch(`${import.meta.env.VITE_CENTRAL_SERVER}/api/signup/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
