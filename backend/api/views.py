@@ -319,6 +319,29 @@ class FileFilterView(APIView):
             )
 
 
+class UserFilesView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+
+        owned_files = user.owned_files.all()
+        shared_files = user.shared_files.all()
+
+        all_user_files = owned_files.union(shared_files)
+
+        serializer = FileSerializer(all_user_files, many=True)
+
+        try:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(f"Error: {e}")
+            return Response(
+                {"error": f"An error occured {e}"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+
 class ReportUserView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

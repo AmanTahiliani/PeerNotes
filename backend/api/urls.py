@@ -68,4 +68,5 @@ urlpatterns = [
     path("api/report_user/", views.ReportUserView.as_view(), name="report-user"),
     path("api/register/", views.RegisterFile.as_view(), name="file-register"),
     path("api/files/filter/", views.FileFilterView.as_view(), name="file-filter-view"),
+    path("api/get-peer-files/", views.UserFilesView.as_view(), name="user-files-view"),
 ]
