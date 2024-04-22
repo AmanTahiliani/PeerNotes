@@ -247,7 +247,6 @@ class FileFilterView(APIView):
             professor_id = request.query_params.get("professor")
             course_id = request.query_params.get("course")
             semester_id = request.query_params.get("semester")
-            peer_id = request.query_params.get("peer_id")
 
             # Check if provided filter IDs exist
             if topic_id and not Topic.objects.filter(id=topic_id).exists():
@@ -270,11 +269,6 @@ class FileFilterView(APIView):
                     {"error": f"Semester with id {semester_id} does not exist"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            if peer_id and not PeerUser.objects.filter(id=peer_id).exists():
-                return Response(
-                    {"error": f"Peer with id {peer_id} does not exist"},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
 
             # Start with the base queryset
             queryset = File.objects.all()
@@ -295,14 +289,10 @@ class FileFilterView(APIView):
             ).order_by(F("downvote_count") - F("upvote_count"))
 
             # Filter files based on active peers in the past hour
-            if peer_id:
-                queryset = queryset.filter(peer_users__in=peer_id)
-            else:
-                # active_peer_ids = PeerUser.objects.filter(
-                #     last_poll__gte=timezone.now() - timedelta(hours=1)
-                # ).values_list("id", flat=True)
-                # queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
-                pass
+            active_peer_ids = PeerUser.objects.filter(
+                last_poll__gte=timezone.now() - timedelta(hours=1)
+            ).values_list("id", flat=True)
+            queryset = queryset.filter(peer_users__in=active_peer_ids).distinct()
 
             serializer = FileSerializer(queryset, many=True)
             # Loop through each serialized file to sort its peer_users

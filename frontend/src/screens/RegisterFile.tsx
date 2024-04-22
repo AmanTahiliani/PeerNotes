@@ -17,7 +17,9 @@ export default function RegisterFile() {
     })
       .then(response => response.json())
       .then(data => {
-        const files: string[] = data.files
+        const files: string[] = data.files.map((file: string) => {
+          return file.replace(/\s/g, "_");
+        })
         setRegisteredFiles(
           serverFiles.map((file) => {
             if (files.includes(file.filename)) {
@@ -32,12 +34,12 @@ export default function RegisterFile() {
   }, [serverFiles])
 
   const fetchServerFiles = () => {
-    fetch(`http://localhost:8000/api/files/filter?peer_id=1`, {
+    fetch(`http://localhost:8000/api/get-peer-files/`, {
       method: 'GET',
       headers: getAuthHeaders()
     })
     .then(response => response.json())
-    .then(data => {
+      .then(data => {
       setServerFiles(data)
     })
     .catch(error => console.error(error));
