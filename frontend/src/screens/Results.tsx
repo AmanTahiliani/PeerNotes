@@ -61,6 +61,8 @@ const Results: React.FC = () => {
                   <th>Downvotes</th>
                   <th>Original Author</th>
                   <th>Download</th>
+                  <th>Upvote</th>
+                  <th>Downvote</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,6 +76,8 @@ const Results: React.FC = () => {
                     <td>{file.downvotes.length}</td>
                     <td>{file.original_author.username}</td>
                     <td><DownloadButton file={file} /></td>
+                    <td><UpvoteButton file={file} /></td>
+                    <td><DownvoteButton file={file} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -118,5 +122,48 @@ function DownloadButton({ file }: { file: File }) {
       <button onClick={handleDownload}>Download</button>
     }
       </>
+  );
+}
+
+function UpvoteButton({ file, onUpdate }: { file: File, onUpdate: () => void }) {
+  const [upvoted, setUpvoted] = useState(false);
+
+  const handleUpvote = async () => {
+    try {
+      await fetch(`http://localhost:8000/api/files/${file.id}/upvote/`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+      });
+      setUpvoted(true);
+      window.location.reload();
+      onUpdate();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  return (
+    <button onClick={handleUpvote}>Upvote</button>
+  );
+}
+
+function DownvoteButton({ file, onUpdate }: { file: File, onUpdate: () => void }) {
+  const [downvoted, setDownvoted] = useState(false);
+
+  const handleDownvote = async () => {
+    try {
+      await fetch(`http://localhost:8000/api/files/${file.id}/downvote/`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+      });
+      setDownvoted(true);
+      window.location.reload();
+      onUpdate();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <button onClick={handleDownvote}>Downvote</button>
   );
 }
